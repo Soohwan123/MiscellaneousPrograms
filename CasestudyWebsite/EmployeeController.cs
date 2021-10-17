@@ -69,5 +69,27 @@ namespace CasestudyWebsite.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError); //something went wrong
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Post(EmployeeViewModel viewModel)
+        {
+            try
+            {
+                await viewModel.Add();
+                if (viewModel.Id > 1)
+                {
+                    return Ok(new { msg = "Employee " + viewModel.Lastname + " added!" });
+                }
+                else
+                {
+                    return Ok(new { msg = "Employee " + viewModel.Lastname + " no added!" });
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Problem in " + GetType().Name + " " + MethodBase.GetCurrentMethod().Name + " " + ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError); //something went wrong
+            }
+        }
     }
 }

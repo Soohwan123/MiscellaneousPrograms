@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Employee List</title>
+    <title>Employee Add/Update</title>
     <meta charset="utf-8" />
     <link href="/lib/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -29,12 +29,14 @@
         </div>
     </nav>
     <div class="justify-content-center align-items-center row mt-5 ml-1">
-        <div class="col-6 text-center p-3"><h2>Employees</h2></div>
-        <div class="col-11 text-center p-3"><h4>v1.0</h4></div>
-        <div class="list-group col-10" id="employeeList" style="height:45vh;">
+        <div class="col-12 text-center p-3"><h2>Current Employees</h2></div>
+        <div class="justify-content-center align-items-center row m-2 ml-3" style="overflow:hidden;overflow-y:scroll;height:70vh;">
+            <div class="list-group col-10" id="employeeList" style="height:45vh;">
+            </div>
 
 
-            <!-- Employee rows go here-->
+
+            <!-- employee rows go here-->
         </div>
     </div>
 
@@ -43,7 +45,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="myModalLabel">Employee Update</h2>
+                    <h2 class="modal-title" id="myModalLabel"></h2>
                     <button type="button" class="btm-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -77,8 +79,8 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <input type="button" value="Update" id="updatebutton" />
-                        <div id="status" class="text-left mt-3 mb-2"></div>
+                        <input type="button" class="btn btn-primary" value="update" id="actionbutton" />
+                        <div id="modalstatus" class="text-left mt-3 mb-2" style="width:70%;"></div>
                     </div>
                 </div>
             </div>
@@ -86,6 +88,6 @@
     </div>
     <script src="/lib/js/jquery.min.js"></script>
     <script src="/lib/js/bootstrap.min.js"></script>
-    <script src="/js/Employee.js"></script>
+    <script src="/js/employeeaddupdate.js"></script>
 </body>
 </html>
