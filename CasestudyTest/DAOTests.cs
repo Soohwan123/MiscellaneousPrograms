@@ -64,8 +64,7 @@ namespace CasestudyTests
         public async Task Employee_DeleteTest()
         {
             EmployeeDAO dao = new EmployeeDAO();
-            await dao.Delete(7);
-            Assert.Null(dao.GetById(7));
+            Assert.True(await dao.Delete(8) == 1);
         }
 
         [Fact]
