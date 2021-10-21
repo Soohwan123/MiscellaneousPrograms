@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Employee Lookup</title>
+    <title>Employees</title>
     <meta charset="utf-8" />
     <link href="/lib/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -17,7 +17,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/exercises/htmlpage.html">Home</a>
-                </li>
+                </li>         
                 <li class="nav=item">
                     <a class="nav-link active" href="/exercises/employees.html">Employees</a>
                 </li>
@@ -26,10 +26,18 @@
     </nav>
     <div class="justify-content-center align-items-center row ml-1 bg-dark">
         <div class="col-xl-12 text-center py-xl-1 text-light"><h2>Employees</h2></div>
-        <div class="col-xl-12 text-center py-xl-1" id="hub">
+        <div class="col-xl-12 text-center py-xl-1">
             <h3><img src="hub.jpg" width="150" height="100" alt="hub" /></h3>
         </div>
-        <div class="col-11 text-center p-3 text-light"><h4>v1.0</h4></div>
+            <div class="col-11 text-center p-3 text-light"><h4>v1.0</h4></div>
+            <div class="justify-content-center align-items-center row m-2 ml-3" style="overflow:hidden;overflow-y:scroll;height:70vh;">
+                <div class="list-group col-10" id="employeeList" style="height:45vh;">
+                </div>
+
+
+
+                <!-- employee rows go here-->
+            </div>
     </div>
 
 
@@ -37,7 +45,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="myModalLabel"></h2>
+                    <h2 class="modal-title" id="myModalLabel">Employee Update</h2>
                     <button type="button" class="btm-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -48,35 +56,40 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-3" style="font-weight:bold;">Title:</div>
-                                    <div class="col-2 text-left" id="title"></div>
-                                    <div class="col-3 text-right" style="font-weight:bold;">First:</div>
-                                    <div class="col-4 text-left" id="firstname"></div>
+                                    <div class="col-4">Title:</div>
+                                    <div class="col-8"><input type="text" placeholder="enter title" id="TextBoxTitle" class="form-control" /></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-3" style="font-weight:bold;">Phone:</div>
-                                    <div class="col-8 text-left" id="phone"></div>
+                                    <div class="col-4">First:</div>
+                                    <div class="col-8"><input type="text" placeholder="enter first name" id="TextBoxFirstname" class="form-control" /></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-3" style="font-weight:bold;">Last:</div>
-                                    <div class="col-8 text-left" id="last"></div>
+                                    <div class="col-4">Surname:</div>
+                                    <div class="col-8"><input type="text" placeholder="enter last name" id="TextBoxLastname" class="form-control" /></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-3" style="font-weight:bold;">Email:</div>
+                                    <div class="col-4">Phone#:</div>
+                                    <div class="col-8"><input type="text" placeholder="enter phone#" id="TextBoxPhone" class="form-control" /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">Email:</div>
+                                    <div class="col-8"><input type="text" placeholder="enter email address" id="TextBoxEmail" class="form-control" /></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">Department:</div>
                                     <div class="col-8">
-                                        <input type="text" placeholder="enter email" id="TextBoxEmail" class="form-control my-2" />
+                                        <select id="ddlDepartments" name="ddlDepartments" class="form-control" />
+                                        <!-- division names go here--->
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer text-center">
-                                <input type="button" value="Find Employee" id="getButton" />
-                                <div id="status" class="text-left mt-3 mb-2"></div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer text-center">
                         <div id="modalstatus" class="text-center mt-3 mb-2" style="width:100%;"></div>
                         <input type="button" class="btn btn-primary" value="update" id="actionbutton" />
+
+                        <input type="button" class="btn btn-secondary" value="delete" style="display:none" id="deletebutton" />
                         <div id="modalstatus" class="text-left mt-3 mb-2" style="width:50%;"></div>
                     </div>
                 </div>
@@ -85,6 +98,6 @@
     </div>
     <script src="/lib/js/jquery.min.js"></script>
     <script src="/lib/js/bootstrap.min.js"></script>
-    <script src="/js/employeelookup.js"></script>
+    <script src="/js/employees.js"></script>
 </body>
 </html>

@@ -35,6 +35,32 @@
             $("#status").text(error.message);
         }
     });
+
+    $("#hub").click(async (e) => {
+        try {
+            clearModalFields();
+            $("#status").text("please wait...");
+            $("#myModal").modal("toggle");
+        } catch (error) { //catastrophic
+            $("#status").text(error.message);
+        }
+    });
+
+    const clearModalFields = () => {
+        $("#title").val("");
+        $("#firstname").val("");
+        $("#lastname").val("");
+        $("#phone").val("");
+        $("#TextBoxEmail").val("");
+  
+    };//clearModalFields
+
+    $("#actionbutton").mouseup(async (e) => {
+        $("#actionbutton").val() === "Update" ? update() : add();
+    });
+
+
+
 });
 
 // server was reached but server had a problem with the call

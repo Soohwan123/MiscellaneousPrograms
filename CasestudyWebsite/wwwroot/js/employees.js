@@ -32,10 +32,14 @@
     const setupForUpdate = (id, data) => {
         $("#actionbutton").val("update");
         $("#modaltitle").html("<h4>update employee</h4>");
+        $("#deletebutton").show();
 
         clearModalFields();
         data.map(employee => {
             if (employee.id === parseInt(id)) {
+                //set value of ddl for departments
+                $('#ddlDepartments').val(employee.departmentID);
+
                 $("#TextBoxTitle").val(employee.title);
                 $("#TextBoxFirstname").val(employee.firstname);
                 $("#TextBoxLastname").val(employee.lastname);
@@ -57,6 +61,8 @@
         $("#myModal").modal("toggle");
         $("#modalstatus").text("add new employee");
         $("#myModalLabel").text("Add");
+        $('#ddlDepartments').val(-1);
+        $("#deletebutton").hide();
         clearModalFields();
 
     }; //setupForAdd
@@ -68,11 +74,13 @@
         $("#TextBoxLastName").val("");
         $("#TextBoxPhone").val("");
         $("#TextBoxEmail").val("");
+        $('#ddlDepartments').val(-1);
         sessionStorage.removeItem("id");
         sessionStorage.removeItem("departmentId");
         sessionStorage.removeItem("timer");
         $("#myModal").modal("toggle");
     };//clearModalFields
+
 
 
     const add = async () => {
@@ -83,7 +91,7 @@
             emp.lastname = $("#TextBoxLastname").val();
             emp.phoneno = $("#TextBoxPhone").val();
             emp.email = $("#TextBoxEmail").val();
-            emp.departmentID = 100; //hard code if for now, we'll add a dropdown later
+            emp.departmentID = parseInt($("#ddlDepartments").val());
             emp.id = 4213;
 
             //send the employee info to the server ansychronously using POST
@@ -121,16 +129,16 @@
             emp.lastname = $("#TextBoxLastname").val();
             emp.phoneno = $("#TextBoxPhone").val();
             emp.email = $("#TextBoxEmail").val();
-            emp.divisionName = "";
+            emp.name = "";
             emp.picture64 = "";
 
             //stored earlier, numbers needed for Ids or http 401
             emp.id = parseInt(sessionStorage.getItem("id"));
-            emp.departmentID = parseInt(sessionStorage.getItem("departmentId"));
+            emp.departmentID = parseInt($("#ddlDepartments").val());
             emp.timer = sessionStorage.getItem("timer");
             emp.picture64 = null;
 
-            //don't have to do ID, Timer, and division Id because they're already stored in employeeObject from before
+            //don't have to do ID, Timer, and department Id because they're already stored in employeeObject from before
             //sent the updated back to the server asynchronously using PUT
             let response = await fetch('/api/employee', {
                 method: "PUT",
@@ -193,10 +201,10 @@
         </div>`);
         div.appendTo($("#employeeList"));
         sessionStorage.setItem("allemployees", JSON.stringify(data));
-        btn = $(`<button class="list-group-item row d-flex" id="0">...click to add employee</button>`)
+        btn = $(`<button class="list-group-item row d-flex text-center" id="0">...click to add employee</button>`)
         btn.appendTo($("#employeeList"));
         data.map(emp => {
-            btn = $(`<button class="list-group-item row d-flex" id="${emp.id}"></button>`);
+            btn = $(`<button class="list-group-item row d-flex" id="${emp.id}">`);
             btn.html(`<div class="col-4" id="employeetitle${emp.id}">${emp.title}</div>
             <div class="col-4" id="employeefname${emp.id}">${emp.firstname}</div>
             <div class="col-4" id="employeelastname${emp.id}">${emp.lastname}</div>`
@@ -204,7 +212,49 @@
             btn.appendTo($("#employeeList"));
         }); // map
     }; //buildEmployeeList
+
+    const _delete = async () => {
+        try {
+            let response = await fetch(`/api/employee/${sessionStorage.getItem('id')}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+            });
+            if (response.ok) //or check for response.status
+            {
+                let data = await response.json();
+                getAll(data.msg);
+            } else {
+                $('#status').text(`Status - ${response.status}, Problem on delete server side, see server console`);
+            } //else
+            $('#myModal').modal('toggle');
+        } catch (error) {
+            $('#status').text(error.message);
+        }
+    }; // delete
+
+    $('#deletebutton').click(() => {
+        if (window.confirm('Are you sure')) {
+            _delete();
+        }
+    })
+
+    let loadDepartmentDDL = async () => {
+        //go get all the department data
+        response = await fetch(`/api/department`)
+        if (!response.ok)
+            throw new Error(`Status - ${response.status}, Text - ${response.statusText}`);
+        let divs = await response.json();
+
+        html = '';
+        $('#ddlDepartments').empty();
+        divs.map(div =>
+            html += `<option value="${div.id}">${div.name}</option>`
+        );
+        $('#ddlDepartments').append(html);
+    }
+
     getAll(""); //first grab the data from the server
+    loadDepartmentDDL(); //calling departments
 }); // jQuery method
 
 // server was reached but server had a problem with the call

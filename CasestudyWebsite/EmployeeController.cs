@@ -14,7 +14,7 @@ namespace CasestudyWebsite.Controllers
     public class EmployeeController : ControllerBase
     {
         //would have to hit this route
-        //api/Student/Corcoran
+        //api/Employee/Corcoran
         [HttpGet("{email}")]
         public async Task<IActionResult> GetByEmailAsync(string email)
         {
@@ -84,6 +84,21 @@ namespace CasestudyWebsite.Controllers
                 {
                     return Ok(new { msg = "Employee " + viewModel.Lastname + " no added!" });
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Problem in " + GetType().Name + " " + MethodBase.GetCurrentMethod().Name + " " + ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError); //something went wrong
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                EmployeeViewModel viewmodel = new EmployeeViewModel { Id = id };
+                return await viewmodel.Delete() == 1 ? Ok(new { msg = "Employee " + id + " deleted!" }) : Ok(new { msg = "Employee " + id + " not deleted!" });
             }
             catch (Exception ex)
             {
