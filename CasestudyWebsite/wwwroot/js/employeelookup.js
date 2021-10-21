@@ -55,12 +55,6 @@
   
     };//clearModalFields
 
-    $("#actionbutton").mouseup(async (e) => {
-        $("#actionbutton").val() === "Update" ? update() : add();
-    });
-
-
-
 });
 
 // server was reached but server had a problem with the call

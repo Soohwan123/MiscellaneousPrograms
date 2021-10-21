@@ -8,76 +8,74 @@
     <meta name="viewport" content="width=device=width, initial-scale=1">
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-danger">
-        <a class="navbar-brand mx-3" href="#">Case# 1</a>
-        <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="nabarContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/exercises/htmlpage.html">Home</a>
-                </li>
-                <li class="nav=item">
-                    <a class="nav-link active" href="/exercises/employees.html">Employees</a>
-                </li>
-            </ul>
+    <div class="w-auto p-3 bg-dark">
+        <nav class="navbar navbar-expand-md navbar-dark bg-danger">
+            <a class="navbar-brand mx-3" href="#">Case# 1</a>
+            <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nabarContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/exercises/htmlpage.html">Home</a>
+                    </li>
+                    <li class="nav=item">
+                        <a class="nav-link active" href="/exercises/employees.html">Employees</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="justify-content-center align-items-center row ml-1 bg-dark">
+            <div class="col-xl-12 text-center py-xl-1 text-light"><h2>Employees</h2></div>
+            <div class="col-xl-12 text-center py-xl-1" id="hub">
+                <h3><img src="hub.jpg" width="150" height="100" alt="hub" /></h3>
+            </div>
+            <div class="col-11 text-center p-3 text-light"><h4>Click this image to find an employee by email</h4></div>
+            <div class="col-11 text-center p-3 text-light"><h4>v1.0</h4></div>
         </div>
-    </nav>
-    <div class="justify-content-center align-items-center row ml-1 bg-dark">
-        <div class="col-xl-12 text-center py-xl-1 text-light"><h2>Employees</h2></div>
-        <div class="col-xl-12 text-center py-xl-1" id="hub">
-            <h3><img src="hub.jpg" width="150" height="100" alt="hub" /></h3>
-        </div>
-        <div class="col-11 text-center p-3 text-light"><h4>v1.0</h4></div>
-    </div>
 
 
-    <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="myModalLabel"></h2>
-                    <button type="button" class="btm-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mx-4 my-4">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                Employee Information
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-3" style="font-weight:bold;">Title:</div>
-                                    <div class="col-2 text-left" id="title"></div>
-                                    <div class="col-3 text-right" style="font-weight:bold;">First:</div>
-                                    <div class="col-4 text-left" id="firstname"></div>
+        <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="myModalLabel"></h2>
+                        <button type="button" class="btm-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mx-4 my-4">
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    Employee Information
                                 </div>
-                                <div class="row">
-                                    <div class="col-3" style="font-weight:bold;">Phone:</div>
-                                    <div class="col-8 text-left" id="phone"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3" style="font-weight:bold;">Last:</div>
-                                    <div class="col-8 text-left" id="last"></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-3" style="font-weight:bold;">Email:</div>
-                                    <div class="col-8">
-                                        <input type="text" placeholder="enter email" id="TextBoxEmail" class="form-control my-2" />
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-3" style="font-weight:bold;">Title:</div>
+                                        <div class="col-2 text-left" id="title"></div>
+                                        <div class="col-3 text-right" style="font-weight:bold;">First:</div>
+                                        <div class="col-4 text-left" id="firstname"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3" style="font-weight:bold;">Phone:</div>
+                                        <div class="col-8 text-left" id="phone"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3" style="font-weight:bold;">Last:</div>
+                                        <div class="col-8 text-left" id="last"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3" style="font-weight:bold;">Email:</div>
+                                        <div class="col-8">
+                                            <input type="text" placeholder="enter email" id="TextBoxEmail" class="form-control my-2" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-footer text-center">
-                                <input type="button" value="Find Employee" id="getButton" />
-                                <div id="status" class="text-left mt-3 mb-2"></div>
+                                <div class="card-footer text-center">
+                                    <input type="button" value="Find Employee" id="getButton" />
+                                    <div id="status" class="text-left mt-3 mb-2"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <div id="modalstatus" class="text-center mt-3 mb-2" style="width:100%;"></div>
-                        <input type="button" class="btn btn-primary" value="update" id="actionbutton" />
-                        <div id="modalstatus" class="text-left mt-3 mb-2" style="width:50%;"></div>
                     </div>
                 </div>
             </div>
