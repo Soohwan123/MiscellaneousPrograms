@@ -6,7 +6,7 @@
   3.0	3.0	ut006_test_Gregorian_month_name
   3.0	3.0	ut007_gregorian_to_jdn_basic_test
   3.0	3.0	ut008_concept_gregorian_jdn_with_tod_test
-  5.4	6.0	ut009_test_jd_to_gregorian
+  6.0	6.0	ut009_test_jd_to_gregorian
   1.0	1.0	ut010_Jdn_differences
   1.0	1.0	ut011_test_Jd_ctor_default
   0.0	1.0	ut012_test_Jd_ctor_default_no_time_of_day
@@ -24,9 +24,9 @@
   0.3	0.3	ut024_test_Gregorian_cast_to_Jd
   0.3	0.3	ut025_test_Gregorian_assignment_from_Jd
   0.3	0.3	ut026_test_Gregorian_add_days
-  0.0	0.3	ut027_test_Gregorian_add_days_with_time
+  0.3	0.3	ut027_test_Gregorian_add_days_with_time
   0.3	0.3	ut028_test_Gregorian_add_weeks
-  0.0	0.3	ut029_test_Gregorian_add_weeks_with_time
+  0.3	0.3	ut029_test_Gregorian_add_weeks_with_time
   0.3	0.3	ut030_test_Gregorian_add_months
   0.3	0.3	ut031_test_Gregorian_add_months_w_carry
   0.3	0.3	ut032_test_Gregorian_add_month_leap
@@ -40,16 +40,16 @@
   3.0	3.0	ut040_test_Julian_days_of_month
   3.0	3.0	ut041_test_Julian_month_name
   2.0	2.0	ut042_test_Julian_to_jd
-  1.8	2.0	ut043_jdn_to_julian_test
+  2.0	2.0	ut043_jdn_to_julian_test
   0.0	0.3	ut044_test_Julian_ctor_default
   0.3	0.3	ut045_test_Julian_ctor_literal
-  0.2	0.3	ut046_test_Julian_ctor_from_Jd
+  0.3	0.3	ut046_test_Julian_ctor_from_Jd
   0.3	0.3	ut047_test_Julian_cast_to_Jd
-  0.1	0.3	ut048_test_Julian_assignment_from_Jd
-  0.0	0.3	ut049_test_Julian_add_days
-  0.0	0.3	ut050_test_Julian_add_days_with_time
-  0.0	0.3	ut051_test_Julian_add_weeks
-  0.0	0.3	ut052_test_Julian_add_weeks_with_time
+  0.2	0.3	ut048_test_Julian_assignment_from_Jd
+  0.3	0.3	ut049_test_Julian_add_days
+  0.3	0.3	ut050_test_Julian_add_days_with_time
+  0.2	0.3	ut051_test_Julian_add_weeks
+  0.2	0.3	ut052_test_Julian_add_weeks_with_time
   0.3	0.3	ut053_test_Julian_add_months
   0.3	0.3	ut054_test_Julian_add_months_w_carry
   0.3	0.3	ut055_test_Julian_add_month_leap
@@ -118,4 +118,4 @@
   0.0	1.0	ut118_test_hebrew_full
   0.0	1.0	ut119_test_vulcan_to_jd_full
 
-Score = 63.0 of 94.0 (67.0%)
+Score = 65.8 of 94.0 (70.0%)

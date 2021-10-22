@@ -71,9 +71,9 @@ namespace khronos {
 			leapadj = ((wjd < gregorian_to_jd(year, 3, 1, 0, 0, 0)) ? 0 : (is_gregorian_leapyear(year) ? 1 : 2));
 			month = static_cast<month_t>(floor((((yearday + leapadj) * 12) + 373) / 367));
 			day = static_cast<day_t>((wjd - gregorian_to_jd(year, month, 1, 0, 0, 0)) + 1);
-			hour = TimeOfDay(jd).hour();
-			minute = TimeOfDay(jd).minute();
-			second = TimeOfDay(jd).second();
+			hour = TimeOfDay(tod(jd)).hour();
+			minute = TimeOfDay(tod(jd)).minute();
+			second = TimeOfDay(tod(jd)).second();
 		}
 
 		// integer implementation
@@ -99,6 +99,9 @@ namespace khronos {
 		// integer implementation
 		inline void jd_to_gregorian_integer(jd_t jd, year_t& year, month_t& month, day_t& day, hour_t& hour, minute_t& minute, second_t& second) {
 			assert(jd >= -31738.5 && "Minimum convertible date not provided.");
+			hour = TimeOfDay(tod(jd)).hour();
+			minute = TimeOfDay(tod(jd)).minute();
+			second = TimeOfDay(tod(jd)).second();
 			jd = floor(jd - 0.5) + 0.5;
 			long long j = static_cast<long long>(jd + 0.5) + 32044;
 			long long g = j / 146097;
@@ -114,9 +117,7 @@ namespace khronos {
 			year = y - 4800 + (m + 2) / 12;
 			month = (m + 2) % 12 + 1;
 			day = static_cast<day_t>(da - (m + 4) * 153 / 5 + 123);
-			hour = TimeOfDay(jd).hour();
-			minute = TimeOfDay(jd).minute();
-			second = TimeOfDay(jd).second();
+			
 		}
 	};
 	void jd_to_gregorian(jd_t jd, year_t& year, month_t& month, day_t& day) {
@@ -152,6 +153,9 @@ namespace khronos {
 	void jd_to_gregorian(jd_t jd, year_t& year, month_t& month, day_t& day, hour_t& hour, minute_t& minute, second_t& second) {
 		assert(jd >= -31738.5 && "Minimum convertable date not provided.");
 
+		hour = TimeOfDay(tod(jd)).hour();
+		minute = TimeOfDay(tod(jd)).minute();
+		second = TimeOfDay(tod(jd)).second();
 		jd = floor(jd - 0.5) + 0.5;
 		long long a = static_cast<long long>(jd + 0.5) + 32044;
 		long long b = (4 * a + 3) / 146097;
@@ -162,9 +166,7 @@ namespace khronos {
 		day = static_cast<day_t>(e - (153 * m + 2) / 5 + 1);
 		month = static_cast<month_t>(m + 3 - 12 * (m / 10));
 		year = b * 100 + d - 4800 + m / 10;
-		hour = TimeOfDay(jd).hour();
-		minute = TimeOfDay(jd).minute();
-		second = TimeOfDay(jd).second();
+		
 
 
 
@@ -176,11 +178,11 @@ namespace khronos {
 			year_t y;
 			month_t m;
 			day_t d;
-			detail::jd_to_gregorian_integer(jd, y, m, d);
+			detail::jd_to_gregorian_integer(jd, y, m, d,h,min,s);
 			assert(year == y);
 			assert(month == m);
 			assert(day == d);
-			detail::jd_to_gregorian_real(jd, y, m, d);
+			detail::jd_to_gregorian_real(jd, y, m, d, h, min, s);
 			assert(year == y);
 			assert(month == m);
 			assert(day == d);

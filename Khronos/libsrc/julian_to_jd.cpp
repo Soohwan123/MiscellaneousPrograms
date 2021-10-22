@@ -112,9 +112,9 @@ namespace khronos {
 				year = static_cast<year_t>(floor(quadricent - 4715));
 			}
 			day = static_cast<day_t>(depoch - dqc - floor(30.6001 * cent));
-			hour = TimeOfDay(jd).hour();
-			minute = TimeOfDay(jd).minute();
-			second = TimeOfDay(jd).second();
+			hour = TimeOfDay(tod(jd)).hour();
+			minute = TimeOfDay(tod(jd)).minute();
+			second = TimeOfDay(tod(jd)).second();
 		}
 
 		// integer implementation
@@ -144,6 +144,9 @@ namespace khronos {
 		// integer implementation
 		inline void jd_to_julian_integer(jd_t jd, year_t& year, month_t& month, day_t& day, hour_t& hour, minute_t& minute, second_t& second) {
 			assert(jd >= -31738.5 && "Minimum convertible date not provided.");
+			hour = TimeOfDay(tod(jd)).hour();
+			minute = TimeOfDay(tod(jd)).minute();
+			second = TimeOfDay(tod(jd)).second();
 			jd = floor(jd + 0.5);
 			long long j = static_cast<long long>(jd + 1524);
 			long long g = floor((j - 122.1) / 365.25);
@@ -163,9 +166,7 @@ namespace khronos {
 				year = static_cast<year_t>(floor(g - 4715));
 			}
 			day = static_cast<day_t>(j - dg - floor(30.6001 * c));
-			hour = TimeOfDay(jd).hour();
-			minute = TimeOfDay(jd).minute();
-			second = TimeOfDay(jd).second();
+			
 		}
 	};
 	jd_t julian_to_jd(year_t year, month_t month, day_t day, hour_t hour, minute_t minute, second_t second) {
@@ -235,6 +236,9 @@ namespace khronos {
 	}
 	void jd_to_julian(jd_t jd, year_t& year, month_t& month, day_t& day, hour_t& hour, minute_t& minute, second_t& second) {
 		assert(jd >= -31738.5 && "Minimum convertable date not provided.");
+		hour = TimeOfDay(tod(jd)).hour();
+		minute = TimeOfDay(tod(jd)).minute();
+		second = TimeOfDay(tod(jd)).second();
 
 		jd = floor(jd + 0.5);
 		long long j = static_cast<long long>(jd + 1524);
@@ -255,9 +259,7 @@ namespace khronos {
 			year = static_cast<year_t>(floor(g - 4715));
 		}
 		day = static_cast<day_t>(j - dg - floor(30.6001 * c));
-		hour = TimeOfDay(jd).hour();
-		minute = TimeOfDay(jd).minute();
-		second = TimeOfDay(jd).second();
+		
 	}
 #if defined( _DEBUG )
 		{

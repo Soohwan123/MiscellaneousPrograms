@@ -118,11 +118,9 @@ namespace khronos {
 
 	khronos::Julian operator + (khronos::Julian const& dt, khronos::detail::packaged_hour const& hour) {
 
-		jd_t temp = tod(dt.hour(), dt.minute(), dt.second());
-		jd_t hourN = (static_cast<jd_t>(hour.nHours_) * 360 / SECONDS_PER_DAY);
-		jd_t tempSum = temp + hourN;
+		jd_t temp = tod(dt.hour()+ hour.nHours_, dt.minute(), dt.second());
 
-		jd_t sum = julian_to_jd(dt.year(), dt.month(), dt.day(), TimeOfDay(tempSum).hour(), TimeOfDay(tempSum).minute(), TimeOfDay(tempSum).second());
+		jd_t sum = julian_to_jd(dt.year(), dt.month(), dt.day(), TimeOfDay(temp).hour(), TimeOfDay(temp).minute(), TimeOfDay(temp).second());
 		year_t y;
 		month_t m;
 		day_t d;
@@ -139,9 +137,7 @@ namespace khronos {
 
 
 	khronos::Julian operator + (khronos::Julian const& dt, khronos::detail::packaged_minute const& minute) {
-		jd_t temp = tod(dt.hour(), dt.minute(), dt.second());
-		jd_t minuteN = (static_cast<jd_t>(minute.nMinutes_) * 60 / SECONDS_PER_DAY);
-		jd_t tempSum = temp + minuteN;
+		jd_t tempSum = tod(dt.hour(), dt.minute()+ minute.nMinutes_, dt.second());
 
 		jd_t sum = julian_to_jd(dt.year(), dt.month(), dt.day(), TimeOfDay(tempSum).hour(), TimeOfDay(tempSum).minute(), TimeOfDay(tempSum).second());
 		year_t y;
@@ -161,9 +157,7 @@ namespace khronos {
 
 	khronos::Julian operator + (khronos::Julian const& dt, khronos::detail::packaged_second const& second) {
 
-		jd_t temp = tod(dt.hour(), dt.minute(), dt.second());
-		jd_t secondN = (static_cast<jd_t>(second.nSeconds_) / SECONDS_PER_DAY);
-		jd_t tempSum = temp + secondN;
+		jd_t tempSum = tod(dt.hour(), dt.minute()+ second.nSeconds_, dt.second());
 
 		jd_t sum = julian_to_jd(dt.year(), dt.month(), dt.day(), TimeOfDay(tempSum).hour(), TimeOfDay(tempSum).minute(), TimeOfDay(tempSum).second());
 		year_t y;

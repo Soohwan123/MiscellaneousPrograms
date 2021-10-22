@@ -14,6 +14,7 @@ Khronos library 'time-of-day' declarations.
 #include <ctime>
 #include <iomanip>
 #include <algorithm>
+#include <cmath>
 
 #include <khronos/def.hpp>
 #include <khronos/calendar.hpp>
@@ -41,13 +42,13 @@ namespace khronos {
 	}
 
 	constexpr jd_t tod(hour_t hour, minute_t minute, second_t second) {
-		return((hour * 60 + minute) * 60  + second)/SECONDS_PER_DAY;
+		return static_cast<jd_t>((second + (60 * static_cast<jd_t>(hour * 60 + minute))) / SECONDS_PER_DAY);
 	}
 
-	inline second_t secondsInDay(tod_t t) { return static_cast<second_t>(floor(t * 24 * 60 * 60 + 0.5)); }
-	inline hour_t hoursInDay(tod_t t) { return static_cast<hour_t>(secondsInDay(t) / (360)); }
-	inline minute_t minutesInDay(tod_t t) { return static_cast<minute_t>(khronos::utility::mod((secondsInDay(t) / 60),60)); }
-	inline tod_t tod(jd_t jd) { return static_cast<jd_t>(jd + 0.5 - floor(jd + 0.5)); }
+	inline second_t secondsInDay(jd_t t) { return static_cast<second_t>(floor(t * 24 * 60 * 60 + 0.5)); }
+	inline hour_t hoursInDay(jd_t t) { return static_cast<hour_t>(secondsInDay(t) / (360)); }
+	inline minute_t minutesInDay(jd_t t) { return static_cast<minute_t>(utility::mod((secondsInDay(t) / 60),60)); }
+	inline jd_t tod(jd_t jd) { return static_cast<jd_t>((jd + 0.5) - floor(jd + 0.5)); }
 
 
 
@@ -62,7 +63,7 @@ namespace khronos {
 		constexpr second_t second() const { return second_; }
 		
 		TimeOfDay(hour_t hour, minute_t minute, second_t second) : hour_(hour), minute_(minute), second_(second) {}
-		TimeOfDay(jd_t jd) : hour_(static_cast<hour_t>(secondsInDay(tod(jd))) / (60 * 60)), minute_(static_cast<minute_t>(khronos::utility::mod((secondsInDay(tod(jd)) / 60), 60))), second_(secondsInDay(tod(jd))) {}
+		TimeOfDay(jd_t jd) : hour_(static_cast<hour_t>(floor(jd*24))) , minute_(static_cast<minute_t>(floor(((jd*24)- floor(jd * 24)) * 60))), second_(static_cast<second_t>(floor((((((jd * 24) - floor(jd * 24)) * 60)-floor(((jd * 24) - floor(jd * 24)) * 60)) * 60) + 0.5))) {}
 	};
 
 }
