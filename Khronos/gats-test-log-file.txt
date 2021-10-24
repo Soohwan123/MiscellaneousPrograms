@@ -115,7 +115,7 @@
   1.0	1.0	ut115_test_gregorian_full
   1.0	1.0	ut116_test_julian_full
   1.0	1.0	ut117_test_islamic_full
-  0.9	1.0	ut118_test_hebrew_full
+  0.0	1.0	ut118_test_hebrew_full
   0.0	1.0	ut119_test_vulcan_to_jd_full
 
-Score = 84.1 of 94.0 (89.4%)
+Score = 83.2 of 94.0 (88.5%)

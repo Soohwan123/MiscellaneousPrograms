@@ -17,10 +17,10 @@
 namespace khronos {
 
 	// LITERALS
-		/* UDL - converts a Julian year CE to an astronomical Gregorian year. */
+		/* UDL - converts a Julian year CE to an astronomical Julian year. */
 	constexpr year_t operator ""_AD(unsigned long long JulianYearAD) { return static_cast<year_t>(JulianYearAD); }
 	constexpr year_t operator ""_ad(unsigned long long JulianYearAD) { return static_cast<year_t>(JulianYearAD); }
-	/* UDL - converts a Julian year BCE to an astronomical Gregorian year. */
+	/* UDL - converts a Julian year BCE to an astronomical Julian year. */
 	constexpr year_t operator ""_BC(unsigned long long JulianYearBC) { return -static_cast<year_t>(JulianYearBC) + 1; }
 	constexpr year_t operator ""_bc(unsigned long long JulianYearBC) { return -static_cast<year_t>(JulianYearBC) + 1; }
 
@@ -166,6 +166,16 @@ namespace khronos {
 	};
 
 
+	/*!	Getting value functions for getting calendar values.
+	\return each value accordingly
+	\param Julian [Julian] g (constructor&)
+	*/
+	inline year_t year(Julian const& g) { return g.year(); }
+	inline month_t month(Julian const& g) { return g.month(); }
+	inline day_t day(Julian const& g) { return g.day(); }
+	inline hour_t hour(Julian const& g) { return g.hour(); }
+	inline minute_t minute(Julian const& g) { return g.minute(); }
+	inline second_t second(Julian const& g) { return  g.second(); }
 
 	// OPERATORS
 	// ====================

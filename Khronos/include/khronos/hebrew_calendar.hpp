@@ -62,6 +62,7 @@ namespace khronos {
 		return hebrew::hebrew_full_month_name_long(month);
 	}
 
+	/** Provide the value of delay of week in the hebrew calendar. */
 	constexpr day_t hebrew_delay_of_week(year_t year) {
 		long long mon = (235 * year - 234) / 19;
 		long long part = 12084 + 13753 * mon;
@@ -73,6 +74,7 @@ namespace khronos {
 		return day;
 	}
 
+	/** Provide the value of adjacent year in the hebrew calendar. */
 	constexpr day_t hebrew_adjacent_year(year_t year) {
 		long long last = hebrew_delay_of_week(year - 1);
 		long long present = hebrew_delay_of_week(year);
@@ -87,6 +89,10 @@ namespace khronos {
 		return days;
 	}
 
+	/*!	Getting days in a year for Proleptic hebrew Calendar.
+	\return days of the year.
+	\param year [in] Astronomical year 
+	*/
 	inline int hebrew_days_in_year(year_t year) {
 		int days = hebrew_to_jd(year + 1, 7, 1) - hebrew_to_jd(year, 7, 1);
 		return days;

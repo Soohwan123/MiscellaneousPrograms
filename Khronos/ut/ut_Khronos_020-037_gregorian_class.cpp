@@ -354,12 +354,12 @@ EMPTY_PHASE(ut035_test_Gregorian_relational, oneThird)
 TEST_PHASE(ut036_test_Gregorian_element_functions, oneThird) {
 	using namespace khronos;
 	Gregorian g(2010, September, 12, 23, 45, 8);
-	GATS_CHECK_EQUAL(g.year(), 2010);
-	GATS_CHECK_EQUAL(g.month(), September);
-	GATS_CHECK_EQUAL(g.day(), 12);
-	GATS_CHECK_EQUAL(g.hour(), 23);
-	GATS_CHECK_EQUAL(g.minute(), 45);
-	GATS_CHECK_EQUAL(g.second(), 8);
+	GATS_CHECK_EQUAL(year(g), 2010);
+	GATS_CHECK_EQUAL(month(g), September);
+	GATS_CHECK_EQUAL(day(g), 12);
+	GATS_CHECK_EQUAL(hour(g), 23);
+	GATS_CHECK_EQUAL(minute(g), 45);
+	GATS_CHECK_EQUAL(second(g), 8);
 }
 #else 
 EMPTY_PHASE(ut036_test_Gregorian_element_functions, oneThird)

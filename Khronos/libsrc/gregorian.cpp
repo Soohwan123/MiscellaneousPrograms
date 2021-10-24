@@ -49,6 +49,8 @@ namespace khronos{
 	}
 
 
+	
+
 	/** Print the Gregorian Date as a string. */
 	std::string khronos::Gregorian::to_string() const {
 		std::ostringstream oss;

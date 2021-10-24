@@ -37,6 +37,8 @@ namespace khronos {
 	void	jd_to_gregorian(jd_t jd, year_t& year, month_t& month, day_t& day, hour_t& hour, minute_t& minute, second_t& second);
 	void	jd_to_gregorian(jd_t jd, year_t& year, month_t& month, day_t& day);
 
+	
+
 	/*!	Leap year test for Proleptic Gregorian Calendar.
 	\return 'true' if leap year, 'false' if not.
 	\param year [in] Astronomical year (1 CE = 1, 1 BCE = 0, 2 BCE = -1, etc.)
@@ -155,19 +157,19 @@ namespace khronos {
 		Gregorian operator - (detail::packaged_year_real const&);
 		Gregorian operator + (detail::packaged_month_real const&);
 		Gregorian operator - (detail::packaged_month_real const&);
-		//Gregorian operator + (detail::packaged_day const&);
-		//Gregorian operator - (detail::packaged_day const&);
-		////Gregorian operator + (detail::packaged_week const&);
-		////Gregorian operator - (detail::packaged_week const&);
-		//Gregorian operator + (detail::packaged_hour const&);
-		//Gregorian operator - (detail::packaged_hour const&);
-		//Gregorian operator + (detail::packaged_minute const&);
-		//Gregorian operator - (detail::packaged_minute const&);
-		//Gregorian operator + (detail::packaged_second const&);
-		//Gregorian operator - (detail::packaged_second const&);
+
 	};
 
-
+	/*!	Getting value functions for getting calendar values.
+	\return each value accordingly
+	\param Gregorian [Gregorian] g (constructor)
+	*/
+	inline year_t year(Gregorian const& g) { return g.year(); }
+	inline month_t month(Gregorian const& g) { return g.month(); }
+	inline day_t day(Gregorian const& g) { return g.day(); }
+	inline hour_t hour(Gregorian const& g) { return g.hour(); }
+	inline minute_t minute(Gregorian const& g) { return g.minute(); }
+	inline second_t second(Gregorian const& g) { return  g.second(); }
 
 	// OPERATORS
 	// ====================

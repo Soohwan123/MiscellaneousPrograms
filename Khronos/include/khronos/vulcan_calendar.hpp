@@ -10,7 +10,7 @@
 
 #include <khronos/def.hpp>
 #include <khronos/calendar.hpp>
-#include <khronos/Julian_day.hpp>
+#include <khronos/julian_day.hpp>
 #include <khronos/timeofday.hpp>
 #include <cstddef>
 #include <string>
@@ -39,7 +39,7 @@ namespace khronos {
 		return vulcan::vulcan_month_name_long(month);
 	}
 
-
+	/** Provide the days in a month in the vulcan calendar. */
 	constexpr day_t vulcan_days_in_month() {
 		return 21;
 	}
@@ -133,7 +133,16 @@ namespace khronos {
 		Vulcan operator - (detail::packaged_month_real const&);
 	};
 
-
+	/*!	Getting value functions for getting calendar values.
+	\return each value accordingly
+	\param Vulcan [Vulcan] g (constructor&)
+	*/
+	inline year_t year(Vulcan const& g) { return g.year(); }
+	inline month_t month(Vulcan const& g) { return g.month(); }
+	inline day_t day(Vulcan const& g) { return g.day(); }
+	inline hour_t hour(Vulcan const& g) { return g.hour(); }
+	inline minute_t minute(Vulcan const& g) { return g.minute(); }
+	inline second_t second(Vulcan const& g) { return  g.second(); }
 
 	// OPERATORS
 	// ====================

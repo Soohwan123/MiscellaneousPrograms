@@ -57,9 +57,9 @@ namespace khronos {
 		}
 
 		/*!	Convert a Julian Day Number to the Proleptic hebrew Calendar
-			\param year [in] Astronomical year (1 CE = 1, 1 BCE = 0, 2 BCE = -1, etc.)
-			\param month [in] 1..12
-			\param day [in] 1..31
+			\param year [in] Astronomical year
+			\param month [in] 1..13
+			\param day [in] 1..30
 		*/
 		void jd_to_hebrew_real(jd_t jd, year_t& year, month_t& month, day_t& day) {
 			assert(jd >= -31738.5 && "Minimum convertible date not provided.");
@@ -85,7 +85,11 @@ namespace khronos {
 			day = floor(jd - hebr2jd_real(year, month, 1) + 1);
 
 		}
-
+		/*!	Convert a Julian Day Number to the Proleptic hebrew Calendar
+			\param year [in] Astronomical year
+			\param month [in] 1..13
+			\param day [in] 1..30
+		*/
 		void jd_to_hebrew_real(jd_t jd, year_t& year, month_t& month, day_t& day, hour_t& hour, minute_t& minute, second_t& second) {
 			assert(jd >= -31738.5 && "Minimum convertible date not provided.");
 			using namespace utility;
@@ -141,7 +145,11 @@ namespace khronos {
 
 
 
-
+	/*!	Convert a Julian Day Number to the Proleptic hebrew Calendar
+			\param year [in] Astronomical year
+			\param month [in] 1..13
+			\param day [in] 1..30
+		*/
 	void jd_to_hebrew(jd_t jd, year_t& year, month_t& month, day_t& day) {
 		assert(jd >= -31738.5 && "Minimum convertable date not provided.");
 
@@ -182,6 +190,11 @@ namespace khronos {
 		}
 #endif
 	}
+	/*!	Convert a Julian Day Number to the Proleptic hebrew Calendar
+			\param year [in] Astronomical year
+			\param month [in] 1..13
+			\param day [in] 1..30
+		*/
 	void jd_to_hebrew(jd_t jd, year_t& year, month_t& month, day_t& day, hour_t& hour, minute_t& minute, second_t& second) {
 		assert(jd >= -31738.5 && "Minimum convertable date not provided.");
 

@@ -35,7 +35,7 @@ namespace khronos {
 
 
 		/*!	Convert a vulcan Day Number to the Proleptic vulcan Calendar
-			\param year [in] Astronomical year (1 CE = 1, 1 BCE = 0, 2 BCE = -1, etc.)
+			\param year [in] Astronomical year 
 			\param month [in] 1..12
 			\param day [in] 1..31
 		*/

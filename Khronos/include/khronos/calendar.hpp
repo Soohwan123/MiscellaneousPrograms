@@ -114,7 +114,7 @@ namespace khronos {
 
 		/** Get the full name of the civil day of week.
 			@return pointer to the day name as a c-string.
-			@param day [in] day number [0..6], where 0 = Monday
+			@param day [in] day number [0..6], where 0 = al-'ahad
 		*/
 		constexpr char const* day_name(day_t day) {
 			constexpr char const* names[7] = {
@@ -134,9 +134,9 @@ namespace khronos {
 		*/
 		constexpr char const* islamic_month_name_long(month_t month) {
 			constexpr char const* const names[13] = {
-				"", "Muharram", "Safar", "RabialAwwal",
-			"RabiathThani", "JumadaalAwwal", "JumadatTania", "Rajab", "Shaban", "Ramadan", "Shawwal",
-			"DhulQadah", "DhulHijja"
+				"", "Muharram", "Safar", "Rabi'al-Awwal",
+				"Rabi'ath-Thani", "Jumada I-Ula", "Jumada t-Tania", "Rajab", "Sha'ban", "Ramadan", "Shawwal",
+				"Dhu I-Qa'da", "Dhu I-Hijja"
 			};
 
 			assert(month > 0);
@@ -163,20 +163,30 @@ namespace khronos {
 				13,14,
 		};
 
-		/**	Returns the number of days in the given month of the Islamic calendar.
+		/**	Returns the number of days in the given month of the  hebrew calendar.
 			@return The number of days in the given month.
-			@param month [in] month number [1..12]
+			@param month [in] month number [1..13]
 			@param isLeapYear [in] 'true' for leap year, 'false' otherwise.
 			*/
 		constexpr day_t hebrew_days_in_month(month_t month, bool isLeapYear) {
 			return hebrew::HebrewDaysInMonth[isLeapYear][month];
 		}
 
+		/**	Returns the number of months in the given year of the  hebrew calendar.
+			@return The number of days in the given month.
+			@param isLeapYear [in] 'true' for leap year, 'false' otherwise.
+			*/
 
 		constexpr month_t hebrew_months_in_year(bool isLeapYear) {
 			return hebrew::MonthsInYears[isLeapYear];
 		}
 
+		// month functions
+
+		/** Get the full names of the hebrew month.
+			@return pointer to the month name as a c-string.
+			@param month [in] month number [1..13]
+		*/
 		constexpr char const* hebrew_full_month_name_long(month_t month) {
 			constexpr char const* const names[14] = {
 				"",
@@ -189,6 +199,11 @@ namespace khronos {
 			assert(month < 14);
 			return names[month];
 		}
+
+		/** Get the month's names of the short years.
+			@return pointer to the month name as a c-string.
+			@param month [in] month number [1..12]
+		*/
 		constexpr char const* hebrew_short_month_name_long(month_t month) {
 			constexpr char const* const names[13] = {
 				"",
@@ -206,6 +221,13 @@ namespace khronos {
 	}
 
 	namespace vulcan {
+
+		// month functions
+
+		/** Get the full name of the vulcan month.
+			@return pointer to the month name as a c-string.
+			@param month [in] month number [1..12]
+		*/
 
 		constexpr char const* vulcan_month_name_long(month_t month) {
 			constexpr char const* const names[13] = {

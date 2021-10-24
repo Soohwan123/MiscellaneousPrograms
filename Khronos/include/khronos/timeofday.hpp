@@ -24,6 +24,10 @@ namespace khronos {
 	constexpr second_t SECONDS_PER_DAY = 86400;
 	constexpr second_t VULCAN_SECONDS_PER_DAY = 52488;
 
+
+	// OPERATORS
+	// ====================
+	/**	time_am */
 	constexpr tod_t operator ""_am(unsigned long long time) {
 		if (time < 12 && time != 12) {
 			return static_cast<tod_t>(time);
@@ -32,7 +36,7 @@ namespace khronos {
 			return static_cast<tod_t>(0);
 		}
 	}
-
+	/**	time_pm */
 	constexpr tod_t operator ""_pm(unsigned long long time) {
 		if (time < 12 && time != 12 && time != 0) {
 			return static_cast<tod_t>(time + 12);
@@ -42,18 +46,37 @@ namespace khronos {
 		}
 	}
 
+	/*!	Provides tod of jd .
+	\return jdn of tod.
+	\param hour [in]  hour of time [1..24]
+	\param minute [in] minute of time [0..59]
+	\param second [in] second of time [0..60]
+	*/
+
 	constexpr jd_t tod(hour_t hour, minute_t minute, second_t second) {
 		return static_cast<jd_t>((second + (60 * static_cast<jd_t>(hour * 60 + minute))) / SECONDS_PER_DAY);
 	}
 
+	/*!	Provides tod of jd from vulcan jdn .
+	\return jdn of tod.
+	\param hour [in]  hour of time [1..24]
+	\param minute [in] minute of time [0..59]
+	\param second [in] second of time [0..60]
+	*/
 	constexpr jd_t vulcanTod(hour_t hour, minute_t minute, second_t second) {
 		return static_cast<jd_t>((second + (54 * static_cast<jd_t>(hour * 54 + minute))) / VULCAN_SECONDS_PER_DAY);
 	}
 
-	inline second_t secondsInDay(jd_t t) { return static_cast<second_t>(floor(t * 24 * 60 * 60 + 0.5)); }
-	inline hour_t hoursInDay(jd_t t) { return static_cast<hour_t>(secondsInDay(t) / (360)); }
-	inline minute_t minutesInDay(jd_t t) { return static_cast<minute_t>(utility::mod((secondsInDay(t) / 60),60)); }
+	/*!	Provides tod of jd .
+	\return real hour minute second.
+	\param hour [in]  jdn
+	*/
 	inline jd_t tod(jd_t jd) { return static_cast<jd_t>((jd + 0.5) - floor(jd + 0.5)); }
+
+	/*!	Provides tod of jd from vulcan jdn.
+	\return real hour minute second.
+	\param hour [in]  jdn
+	*/
 	inline jd_t vulcanTod(jd_t jd) { return static_cast<jd_t>((jd + 0.6) - floor(jd + 0.6)); }
 
 

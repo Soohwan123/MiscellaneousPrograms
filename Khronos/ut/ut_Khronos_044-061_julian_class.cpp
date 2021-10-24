@@ -349,12 +349,12 @@ EMPTY_PHASE(ut059_test_Julian_to_string, oneThird)
 TEST_PHASE(ut060_test_Julian_element_functions, oneThird) {
 	using namespace khronos;
 	Julian g(2010, September, 12, 23, 45, 8);
-	GATS_CHECK_EQUAL(g.year(), 2010);
-	GATS_CHECK_EQUAL(g.month(), September);
-	GATS_CHECK_EQUAL(g.day(), 12);
-	GATS_CHECK_EQUAL(g.hour(), 23);
-	GATS_CHECK_EQUAL(g.minute(), 45);
-	GATS_CHECK_EQUAL(g.second(), 8);
+	GATS_CHECK_EQUAL(year(g), 2010);
+	GATS_CHECK_EQUAL(month(g), September);
+	GATS_CHECK_EQUAL(day(g), 12);
+	GATS_CHECK_EQUAL(hour(g), 23);
+	GATS_CHECK_EQUAL(minute(g), 45);
+	GATS_CHECK_EQUAL(second(g), 8);
 }
 #else 
 EMPTY_PHASE(ut060_test_Julian_element_functions, oneThird)

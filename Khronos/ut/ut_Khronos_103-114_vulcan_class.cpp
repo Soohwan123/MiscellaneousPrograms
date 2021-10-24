@@ -256,12 +256,12 @@ EMPTY_PHASE(ut113_test_Vulcan_to_string,oneSixth)
 TEST_PHASE(ut114_test_Vulcan_element_functions, oneSixth) {
 	using namespace khronos;
 	Vulcan g(2010, Tasmeen, 12, 23, 45, 8);
-	GATS_CHECK_EQUAL(g.year(), 2010);
-	GATS_CHECK_EQUAL(g.month(), Tasmeen);
-	GATS_CHECK_EQUAL(g.day(), 12);
-	GATS_CHECK_EQUAL(g.hour(), 23);
-	GATS_CHECK_EQUAL(g.minute(), 45);
-	GATS_CHECK_EQUAL(g.second(), 8);
+	GATS_CHECK_EQUAL(year(g), 2010);
+	GATS_CHECK_EQUAL(month(g), Tasmeen);
+	GATS_CHECK_EQUAL(day(g), 12);
+	GATS_CHECK_EQUAL(hour(g), 23);
+	GATS_CHECK_EQUAL(minute(g), 45);
+	GATS_CHECK_EQUAL(second(g), 8);
 }
 #else
 EMPTY_PHASE(ut114_test_Vulcan_element_functions,oneSixth)
