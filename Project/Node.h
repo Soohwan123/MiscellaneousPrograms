@@ -6,20 +6,20 @@
 //DECLARE virtual destructor
 //ENDDECLARE
 
-struct Node
+class Node
 {
-private:
+
+public:
 	std::string name;
 	std::string ailment;
 	int severity = 0;
 	int timeCriticality = 0;
 	int contagiousness = 0;
 	int prior = 0;
-public:
 	Node();
 	virtual ~Node();
 	Node* next;
-	Node(std::string name, std::string ailment,int severity, int timeCriticality, int contagiousness);
+	Node(std::string name, std::string ailment,int severity, int timeCriticality, int contagiousness, int prior);
 	std::string getName();
 	std::string getAil();
 	int getSever();

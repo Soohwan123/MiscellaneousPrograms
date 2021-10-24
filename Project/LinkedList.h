@@ -10,7 +10,7 @@ public:
 	LinkedList();
 	Node* head;
 	virtual ~LinkedList();
-	void Insert_With_Priority(std::string name, std::string aliment, int severity, int timeCriticality, int contagiousness);
+	void Insert_With_Priority(std::string name, std::string aliment, int severity, int timeCriticality, int contagiousness, int prior);
 	void displayAll();
 	void displayFive();
 	void Peek();

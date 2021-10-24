@@ -8,29 +8,30 @@ using namespace std;
 
 LinkedList::LinkedList()
 {
-	this->head = NULL;
+	this->head = nullptr;
 }
 
 LinkedList::~LinkedList()
 {
 	if (this->head) {
 		delete this->head;
-		this->head = NULL;
+		this->head = nullptr;
 	}
 }
 
-void LinkedList::Insert_With_Priority(std::string name, std::string aliment, int severity, int timeCriticality, int contagiousness) {
-	Node* tem = new Node(name, aliment, severity, timeCriticality, contagiousness);
+void LinkedList::Insert_With_Priority(std::string name, std::string aliment, int severity, int timeCriticality, int contagiousness, int prior) {
+	Node* tem = new Node(name, aliment, severity, timeCriticality, contagiousness, prior);
 	Node* begin = this->head;
 
-	// Special Case: The head of list has
-	// lesser priority than new node. So
-	// insert newnode before head node
-	// and change head node.
-	if (begin->getPrior() > tem->getPrior()) {
-
+	// If the head of list has
+	// lower priority than new node push the new node
+	if (this->head->getPrior() > tem->getPrior()) {
 		tem->next = begin;
-		begin = tem;
+		this->head = tem;
+
+	}
+	else if (this->head == nullptr) {
+		this->head = tem;
 
 	}
 	else {
@@ -44,18 +45,19 @@ void LinkedList::Insert_With_Priority(std::string name, std::string aliment, int
 		// or at required position
 		tem->next = begin->next;
 		begin->next = tem;
+
 	}
 }
 	
 
 void LinkedList::displayAll() {
-	if (!head) {
+	if (this->head == nullptr) {
 		cout << "List doesn't exist!" << endl;
 	}
 	else {
-		Node* temp = head;
-		while (temp != NULL) {
-			cout << temp->getName() << ", " << temp->getPrior() << ", " << temp->getAil() << endl;
+		Node* temp = this->head;
+		while (temp != nullptr) {
+			std::cout << temp->getName() << ", " << temp->getPrior() << ", " << temp->getAil() << endl;
 			temp = temp->next;
 		}
 	}
@@ -85,9 +87,9 @@ void LinkedList::Pull_Highest_Priority_Element() {
 
 	cout << endl;
 	if (this != NULL) {
-		LinkedList* tem = this;
+		Node* tem = this->head;
 		this->head = this->head->next;
-		free(tem->head);
+		free(tem);
 	}
 	else {
 		std::cout << "There is no patient." << endl;
@@ -99,10 +101,10 @@ void LinkedList::Pull_Highest_Priority_Element(LinkedList** history) {
 
 	cout << endl;
 	if (this != NULL) {
-		LinkedList* tem = this;
+		Node* tem = this->head;
 		*history = this;
 		this->head = this->head->next;
-		free(tem->head);
+		free(tem);
 	}
 	else {
 		std::cout << "There is no patient." << endl;

@@ -147,6 +147,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Node.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="patient.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

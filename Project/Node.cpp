@@ -7,6 +7,12 @@ using namespace std;
 
 Node::Node()
 {
+	this->name = "";
+	this->ailment = "";
+	this->severity = 0;
+	this->timeCriticality = 0;
+	this->contagiousness = 0;
+	this->prior = 0;
 	this->next = nullptr;
 }
 
@@ -18,17 +24,14 @@ Node::~Node()
 	}
 }
 
-Node::Node(std::string name, std::string aliment, int severity, int timeCriticality, int contagiousness)
+Node::Node(std::string name, std::string aliment, int severity, int timeCriticality, int contagiousness, int prior)
 {
-	Node* tem = (Node*)malloc(sizeof(Node));
-	tem->name = name;
-	tem->ailment = aliment;
-	tem->severity = severity;
-	tem->timeCriticality = timeCriticality;
-	tem->contagiousness = contagiousness;
-	tem->prior = severity + timeCriticality + contagiousness;
-
-	tem->next = NULL;
+	this->name = name;
+	this->ailment = aliment;
+	this->severity = severity;
+	this->timeCriticality = timeCriticality;
+	this->contagiousness = contagiousness;
+	this->prior = prior;
 }
 
 
