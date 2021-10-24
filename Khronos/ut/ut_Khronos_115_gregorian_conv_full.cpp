@@ -39,6 +39,7 @@ using namespace std;
 /**	Check all conversions from the lowest Proleptic Gregorian date, until a day well in the future. */
 TEST_PHASE(ut115_test_gregorian_full,1) {
 	using namespace khronos;
+	using namespace detail;
 
 	cout << "Starting Gregorian FULL_TEST: ";
 	auto low = gregorian_to_jd(4800_BCE, January, 1);

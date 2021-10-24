@@ -20,10 +20,16 @@ stipulated in the agreement/contract under which
 the program(s) have been supplied.
 =============================================================*/
 
+#include <khronos.hpp>
 #include <khronos/Julian_day.hpp>
 #include <khronos/gregorian_calendar.hpp>
 #include <sstream>
 #include <ctime>
+#include <cassert>
+#include <khronos/def.hpp>
+#include <khronos/calendar.hpp>
+#include <khronos/timeofday.hpp>
+#include <khronos/utility.hpp>
 
 
 // Jd default constructor. Initialize to the current local time.
@@ -42,6 +48,17 @@ namespace khronos{
 			minute_t(tmNow.tm_min),
 			second_t(tmNow.tm_sec)
 		);
+
+	}
+	namespace detail {
+		jd_t jd_to_jdn_real(jd_t day) {
+			return floor(day + 0.5);
+		}
+	}
+
+	jd_t jd_to_jdn(jd_t day) {
+		assert(day >= -31738.5 && "Minimum convertable date not provided.");
+		return khronos::detail::jd_to_jdn_real(day);
 	}
 
 

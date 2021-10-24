@@ -22,6 +22,7 @@ Khronos library 'time-of-day' declarations.
 
 namespace khronos {
 	constexpr second_t SECONDS_PER_DAY = 86400;
+	constexpr second_t VULCAN_SECONDS_PER_DAY = 52488;
 
 	constexpr tod_t operator ""_am(unsigned long long time) {
 		if (time < 12 && time != 12) {
@@ -45,11 +46,15 @@ namespace khronos {
 		return static_cast<jd_t>((second + (60 * static_cast<jd_t>(hour * 60 + minute))) / SECONDS_PER_DAY);
 	}
 
+	constexpr jd_t vulcanTod(hour_t hour, minute_t minute, second_t second) {
+		return static_cast<jd_t>((second + (54 * static_cast<jd_t>(hour * 54 + minute))) / VULCAN_SECONDS_PER_DAY);
+	}
+
 	inline second_t secondsInDay(jd_t t) { return static_cast<second_t>(floor(t * 24 * 60 * 60 + 0.5)); }
 	inline hour_t hoursInDay(jd_t t) { return static_cast<hour_t>(secondsInDay(t) / (360)); }
 	inline minute_t minutesInDay(jd_t t) { return static_cast<minute_t>(utility::mod((secondsInDay(t) / 60),60)); }
 	inline jd_t tod(jd_t jd) { return static_cast<jd_t>((jd + 0.5) - floor(jd + 0.5)); }
-
+	inline jd_t vulcanTod(jd_t jd) { return static_cast<jd_t>((jd + 0.6) - floor(jd + 0.6)); }
 
 
 	class TimeOfDay {
@@ -64,6 +69,22 @@ namespace khronos {
 		
 		TimeOfDay(hour_t hour, minute_t minute, second_t second) : hour_(hour), minute_(minute), second_(second) {}
 		TimeOfDay(jd_t jd) : hour_(static_cast<hour_t>(floor(jd*24))) , minute_(static_cast<minute_t>(floor(((jd*24)- floor(jd * 24)) * 60))), second_(static_cast<second_t>(floor((((((jd * 24) - floor(jd * 24)) * 60)-floor(((jd * 24) - floor(jd * 24)) * 60)) * 60) + 0.5))) {}
+	};
+	
+	
+
+	class VulcanTimeOfDay {
+		hour_t hour_ = 0;
+		minute_t minute_ = 0;
+		second_t second_ = 0;
+	public:
+		VulcanTimeOfDay();
+		constexpr hour_t hour() const { return hour_; }
+		constexpr minute_t minute() const { return minute_; }
+		constexpr second_t second() const { return second_; }
+
+		VulcanTimeOfDay(hour_t hour, minute_t minute, second_t second) : hour_(hour), minute_(minute), second_(second) {}
+		VulcanTimeOfDay(jd_t jd) : hour_(static_cast<hour_t>(floor(jd * 15))), minute_(static_cast<minute_t>(floor(((jd * 15) - floor(jd * 15)) * 45))), second_(static_cast<second_t>(floor((((((jd * 15) - floor(jd * 15)) * 45) - floor(((jd * 15) - floor(jd * 15)) * 45)) * 45) + 0.6))) {}
 	};
 
 }

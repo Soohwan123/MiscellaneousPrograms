@@ -78,9 +78,9 @@ EMPTY_PHASE(ut069_test_islamic_leapyear, oneThird)
 #if PHASE_70
 TEST_PHASE(ut070_test_Islamic_month_name, oneThird) {
 	using namespace khronos;
-	std::array<std::string, 13> const names = { "", "Muharram", "Safar", "Rabi'al-Awwal",
-		"Rabi'ath-Thani", "Jumada I-Ula", "Jumada t-Tania", "Rajab", "Sha'ban", "Ramadan", "Shawwal",
-		"Dhu I-Qa'da", "Dhu I-Hijja" };
+	std::array<std::string, 13> const names = { "", "Muharram", "Safar", "RabialAwwal",
+			"RabiathThani", "JumadaalAwwal", "JumadatTania", "Rajab", "Shaban", "Ramadan", "Shawwal",
+			"DhulQadah", "DhulHijja" };
 
 	for (month_t i = 1; i <= 12; ++i)
 		GATS_CHECK(islamic_month_name(i) == names[i]);

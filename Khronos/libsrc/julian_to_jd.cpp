@@ -69,13 +69,13 @@ namespace khronos {
 			double wjd, depoch, quadricent, dqc, cent;
 			wjd = floor(jd + 0.5);
 			depoch = wjd + 1524;
-			quadricent = floor(depoch -122.1 / 365.25);
+			quadricent = floor((depoch -122.1) / 365.25);
 			dqc = floor(quadricent*365.25);
 			cent = floor((depoch-dqc)/30.6001);
 			if (cent < 14) {
 				month = static_cast<month_t>(floor(cent - 1));
 			}
-			else if (cent > 14) {
+			else {
 				month = static_cast<month_t>(floor(cent - 13));
 			}
 			
@@ -91,8 +91,27 @@ namespace khronos {
 		void jd_to_julian_real(jd_t jd, year_t& year, month_t& month, day_t& day, hour_t& hour, minute_t& minute, second_t& second) {
 			assert(jd >= -31738.5 && "Minimum convertible date not provided.");
 			using namespace utility;
-
 			double wjd, depoch, quadricent, dqc, cent;
+			wjd = floor(jd + 0.5);
+			depoch = wjd + 1524;
+			quadricent = floor((depoch - 122.1) / 365.25);
+			dqc = floor(quadricent * 365.25);
+			cent = floor((depoch - dqc) / 30.6001);
+			if (cent < 14) {
+				month = static_cast<month_t>(floor(cent - 1));
+			}
+			else {
+				month = static_cast<month_t>(floor(cent - 13));
+			}
+
+			if (month > 2) {
+				year = static_cast<year_t>(floor(quadricent - 4716));
+			}
+			else {
+				year = static_cast<year_t>(floor(quadricent - 4715));
+			}
+			day = static_cast<day_t>(depoch - dqc - floor(30.6001 * cent));
+			/*double wjd, depoch, quadricent, dqc, cent;
 			wjd = floor(jd + 0.5);
 			depoch = wjd + 1524;
 			quadricent = floor((depoch - 122.1) / 365.25);
@@ -111,7 +130,7 @@ namespace khronos {
 			else {
 				year = static_cast<year_t>(floor(quadricent - 4715));
 			}
-			day = static_cast<day_t>(depoch - dqc - floor(30.6001 * cent));
+			day = static_cast<day_t>(depoch - dqc - floor(30.6001 * cent));*/
 			hour = TimeOfDay(tod(jd)).hour();
 			minute = TimeOfDay(tod(jd)).minute();
 			second = TimeOfDay(tod(jd)).second();
@@ -128,7 +147,7 @@ namespace khronos {
 			if (c < 14) {
 				month = static_cast<month_t>(floor(c - 1));
 			}
-			else if (c > 14) {
+			else {
 				month = static_cast<month_t>(floor(c - 13));
 			}
 
@@ -155,7 +174,7 @@ namespace khronos {
 			if (c < 14) {
 				month = static_cast<month_t>(floor(c - 1));
 			}
-			else if (c > 14) {
+			else {
 				month = static_cast<month_t>(floor(c - 13));
 			}
 
@@ -206,7 +225,7 @@ namespace khronos {
 		if (c < 14) {
 			month = static_cast<month_t>(floor(c - 1));
 		}
-		else if (c > 14) {
+		else {
 			month = static_cast<month_t>(floor(c - 13));
 		}
 
@@ -248,7 +267,7 @@ namespace khronos {
 		if (c < 14) {
 			month = static_cast<month_t>(floor(c - 1));
 		}
-		else if (c > 14) {
+		else{
 			month = static_cast<month_t>(floor(c - 13));
 		}
 

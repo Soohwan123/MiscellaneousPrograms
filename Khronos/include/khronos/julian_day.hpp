@@ -47,6 +47,8 @@ namespace khronos {
 	// CLASSES
 // --------------------------------------------------------------------------------------
 
+	jd_t jd_to_jdn(jd_t day);
+	
 /**	Jd Date (JN) class. */
 	class Jd {
 		jd_t jd_;

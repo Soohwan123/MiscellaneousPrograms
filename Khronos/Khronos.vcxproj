@@ -282,6 +282,7 @@
     <ClCompile Include="ut\ut_Khronos_101-102,119_vulcan_conv.cpp" />
     <ClCompile Include="ut\ut_Khronos_103-114_vulcan_class.cpp" />
     <ClCompile Include="ut\ut_utilities.cpp" />
+    <ClCompile Include="vulcan_to_jd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

@@ -185,10 +185,7 @@ namespace khronos{
 		second_t s;
 		jd_to_gregorian(sum, y, m, d, h, mi, s);
 
-		return khronos::Gregorian::Gregorian(y, m, d, h, mi, s);
-
-		return khronos::Gregorian::Gregorian(y, m, d, h, mi, s);
-		
+		return khronos::Gregorian::Gregorian(y, m, d, h, mi, s);		
 
 	}
 };

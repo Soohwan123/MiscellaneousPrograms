@@ -206,6 +206,9 @@
     <ClCompile Include="ut\ut_Khronos_103-114_vulcan_class.cpp">
       <Filter>Source Files\utsrc</Filter>
     </ClCompile>
+    <ClCompile Include="vulcan_to_jd.cpp">
+      <Filter>Source Files\libsrc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

@@ -40,7 +40,7 @@ namespace khronos {
 		if (year_ <= 0)
 			oss << (-year_ + 1) << " BC, ";
 		else
-			oss << year_ << " CE, ";
+			oss << year_ << " AD, ";
 		if (hour_ > 12)
 			oss << (hour_ - 12) << ":";
 		else if (hour_ == 24)

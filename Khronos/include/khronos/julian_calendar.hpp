@@ -17,9 +17,12 @@
 namespace khronos {
 
 	// LITERALS
-	/* UDL - converts a Gregorian year BCE to an astronomical Gregorian year. */
-	constexpr year_t operator ""_BC(unsigned long long gregorianYearBC) { return -static_cast<year_t>(gregorianYearBC) + 1; }
-	constexpr year_t operator ""_bc(unsigned long long gregorianYearBC) { return -static_cast<year_t>(gregorianYearBC) + 1; }
+		/* UDL - converts a Julian year CE to an astronomical Gregorian year. */
+	constexpr year_t operator ""_AD(unsigned long long JulianYearAD) { return static_cast<year_t>(JulianYearAD); }
+	constexpr year_t operator ""_ad(unsigned long long JulianYearAD) { return static_cast<year_t>(JulianYearAD); }
+	/* UDL - converts a Julian year BCE to an astronomical Gregorian year. */
+	constexpr year_t operator ""_BC(unsigned long long JulianYearBC) { return -static_cast<year_t>(JulianYearBC) + 1; }
+	constexpr year_t operator ""_bc(unsigned long long JulianYearBC) { return -static_cast<year_t>(JulianYearBC) + 1; }
 
 	// VALUES
 	/*!	JD of the start of the Julian epoch. */
@@ -66,12 +69,27 @@ namespace khronos {
 		year_t	year_ = 1;
 		month_t	month_ = 1;
 		day_t	day_ = 1;
-		hour_t hour_ = 0;
+		hour_t hour_ = 12;
 		minute_t minute_ = 0;
 		second_t second_ = 0;
 
-		void from_jd(jd_t jd) { jd_to_julian(jd, year_, month_, day_, hour_, minute_, second_); }
-		jd_t to_jd() const { return julian_to_jd(year_, month_, day_, hour_, minute_, second_); }
+		void from_jd(jd_t jd) {
+			if (tod(jd) != 0.5) {
+				jd_to_julian(jd, year_, month_, day_, hour_, minute_, second_);
+			}
+			else {
+				jd_to_julian(jd, year_, month_, day_);
+			}
+			}
+			
+		jd_t to_jd() const { 
+			if (tod(hour_, minute_, second_) != 0.5) {
+				return julian_to_jd(year_, month_, day_, hour_, minute_, second_);
+			}
+			else {
+				return julian_to_jd(year_, month_, day_);
+			}
+		}
 
 
 	public:
@@ -144,14 +162,7 @@ namespace khronos {
 		Julian operator - (detail::packaged_year_real const&);
 		Julian operator + (detail::packaged_month_real const&);
 		Julian operator - (detail::packaged_month_real const&);
-		/*Julian operator + (detail::packaged_day const&);
-		Julian operator - (detail::packaged_day const&);
-		Julian operator + (detail::packaged_hour const&);
-		Julian operator - (detail::packaged_hour const&);
-		Julian operator + (detail::packaged_minute const&);
-		Julian operator - (detail::packaged_minute const&);
-		Julian operator + (detail::packaged_second const&);
-		Julian operator - (detail::packaged_second const&);*/
+	
 	};
 
 
@@ -170,29 +181,7 @@ namespace khronos {
 	/**	Julian - (integer year) */
 	inline Julian operator - (Julian const& dt, detail::packaged_year_integer const& year) { return dt + detail::packaged_year_integer(-year.nYears_); }
 
-	///**	Julian + (day) */
-	//Julian operator + (Julian const& dt, detail::packaged_day const& day);
-
-	///**	Julian - (day) */
-	//inline Julian operator - (Julian const& dt, detail::packaged_day const& day) { return dt + detail::packaged_day(-day.nDays_); }
-
-	///**	Julian + (hour) */
-	//Julian operator + (Julian const& dt, detail::packaged_hour const& hour);
-
-	///**	Julian - (hour) */
-	//inline Julian operator - (Julian const& dt, detail::packaged_hour const& hour) { return dt + detail::packaged_hour(-hour.nHours_); }
-
-	///**	Julian + (minute) */
-	//Julian operator + (Julian const& dt, detail::packaged_minute const& minute);
-
-	///**	Julian - (minute) */
-	//inline Julian operator - (Julian const& dt, detail::packaged_minute const& minute) { return dt + detail::packaged_minute(-minute.nMinutes_); }
-
-	///**	Julian + (second) */
-	//Julian operator + (Julian const& dt, detail::packaged_second const& second);
-
-	///**	Julian - (second) */
-	//inline Julian operator - (Julian const& dt, detail::packaged_second const& second) { return dt + detail::packaged_second(-second.nSeconds_); }
+	
 
 	///** Stream insertion operator. */
 	inline std::ostream& operator << (std::ostream& os, khronos::Julian const& g) { return os << g.to_string(); }
