@@ -6,74 +6,157 @@
     <link href="/lib/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <meta name="viewport" content="width=device=width, initial-scale=1">
+    <style>
+        /* This html page is an extra page to make it a little more professional */
+        body {
+            font: 20px Montserrat, sans-serif;
+            line-height: 1.8;
+            color: #f5f6f7;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .margin {
+            margin-bottom: 45px;
+        }
+
+        .bg-1 {
+            background-color: #343a40; /* Green */
+            color: #ffffff;
+        }
+
+        .bg-2 {
+            background-color: #474e5d; /* Dark Blue */
+            color: #ffffff;
+        }
+
+        .bg-3 {
+            background-color: #ffffff; /* White */
+            color: #555555;
+        }
+
+        .bg-4 {
+            background-color: #2f2f2f; /* Black Gray */
+            color: #fff;
+        }
+
+        .container-fluid {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .navbar {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+            font-size: 12px;
+            letter-spacing: 5px;
+        }
+
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+
+        .zoom {
+            padding: 50px;
+            transition: transform .28s; /* Animation */
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                transform: scale(1.5); /* (150% zoom)*/
+            }
+    </style>
 </head>
 <body>
-    <div class="w-auto p-3 bg-dark">
-        <nav class="navbar navbar-expand-md navbar-dark bg-danger">
-            <a class="navbar-brand mx-3" href="#">Case# 1</a>
-            <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="nabarContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/exercises/htmlpage.html">Home</a>
-                    </li>
-                    <li class="nav=item">
-                        <a class="nav-link active" href="/exercises/employees.html">Employees</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="justify-content-center align-items-center row ml-1 bg-dark">
-            <div class="col-xl-12 text-center py-xl-1 text-light"><h2>Employees</h2></div>
-            <div class="col-xl-12 text-center py-xl-1" id="hub">
-                <h3><img src="hub.jpg" width="150" height="100" alt="hub" /></h3>
-            </div>
-            <div class="col-11 text-center p-3 text-light"><h4>Click this image to find an employee by email</h4></div>
-            <div class="col-11 text-center p-3 text-light"><h4>v1.0</h4></div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-1">
+        <a class="navbar-brand mx-3" href="cover.html">Case# 1</a>
+        <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="/exercises/htmlpage.html">Home</a>
+                </li>
+                <li class="nav=item">
+                    <a class="nav-link active" href="/exercises/employees.html">Employees</a>
+                </li>
+            </ul>
         </div>
+    </nav>
 
-
-        <div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title" id="myModalLabel"></h2>
-                        <button type="button" class="btm-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="container-fluid bg-3 text-center">
+        <div class="overflow-hidden">
+            <p>
+                <div class="justify-content-center align-items-center row ml-1 bg-3">
+                    <div class="col-xl-12 text-center py-xl-1 text-dark"><h2>Find an employee by clicking the magnifier below</h2></div>
+                    <div class="zoom col-xl-12 text-center py-xl-1" id="hub">
+                        <h3><img src="searching.gif" width="1100" height="600" alt="hub" /></h3>
                     </div>
-                    <div class="modal-body">
-                        <div class="mx-4 my-4">
-                            <div class="card">
-                                <div class="card-header text-center">
-                                    Employee Information
+                    <div class="col-11 text-center p-3 text-dark"><h4>v1.0</h4></div>
+                </div>
+            </p>
+        </div>
+    </div>
+
+    <!-- Second Container -->
+    <div class="container-fluid bg-3 text-center">
+    </div>
+
+    <!-- Third Container (Grid) -->
+    <div class="container-fluid bg-3 text-center">
+    </div>
+
+    <!-- Footer -->
+    <footer class="container-fluid bg-3 text-center">
+    </footer>
+
+
+
+
+    <div class="modal fade bg-2" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="myModalLabel"></h2>
+                    <button type="button" class="btm-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mx-4 my-4">
+                        <div class="card">
+                            <div class="card-header text-center text-black-50">
+                                Employee Information
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-3 text-black-50" style="font-weight:bold;">Title:</div>
+                                    <div class="col-2 text-black-50" id="title"></div>
+                                    <div class="col-3 text-black-50" style="font-weight:bold;">First:</div>
+                                    <div class="col-4 text-black-50" id="firstname"></div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-3" style="font-weight:bold;">Title:</div>
-                                        <div class="col-2 text-left" id="title"></div>
-                                        <div class="col-3 text-right" style="font-weight:bold;">First:</div>
-                                        <div class="col-4 text-left" id="firstname"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3" style="font-weight:bold;">Phone:</div>
-                                        <div class="col-8 text-left" id="phone"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3" style="font-weight:bold;">Last:</div>
-                                        <div class="col-8 text-left" id="last"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3" style="font-weight:bold;">Email:</div>
-                                        <div class="col-8">
-                                            <input type="text" placeholder="enter email" id="TextBoxEmail" class="form-control my-2" />
-                                        </div>
+                                <div class="row">
+                                    <div class="col-3 text-black-50" style="font-weight:bold;">Phone:</div>
+                                    <div class="col-8 text-black-50" id="phone"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3 text-black-50" style="font-weight:bold;">Last:</div>
+                                    <div class="col-8 text-left text-black-50" id="lastname"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3 text-black-50" style="font-weight:bold;">Email:</div>
+                                    <div class="col-8 text-black-50">
+                                        <input type="text" placeholder="enter email" id="TextBoxEmail" class="form-control my-2" />
                                     </div>
                                 </div>
-                                <div class="card-footer text-center">
-                                    <input type="button" value="Find Employee" id="getButton" />
-                                    <div id="status" class="text-left mt-3 mb-2"></div>
-                                </div>
+                            </div>
+                            <div class="card-footer text-center text-black-50">
+                                <input type="button" value="Find Employee" id="getButton" />
+                                <div id="status" class="text-left mt-3 mb-2"></div>
                             </div>
                         </div>
                     </div>
@@ -81,6 +164,7 @@
             </div>
         </div>
     </div>
+
     <script src="/lib/js/jquery.min.js"></script>
     <script src="/lib/js/bootstrap.min.js"></script>
     <script src="/js/employeelookup.js"></script>

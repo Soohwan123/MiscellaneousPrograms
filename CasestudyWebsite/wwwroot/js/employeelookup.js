@@ -73,3 +73,9 @@ const errorRtn = (problemJson, status) => {
         console.log(problem);
     }
 }
+
+$("figure").mouseleave(
+    function () {
+        $(this).removeClass("hover");
+    }
+);

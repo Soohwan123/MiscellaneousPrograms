@@ -6,36 +6,91 @@
     <link href="/lib/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <meta name="viewport" content="width=device=width, initial-scale=1">
+    <style>
+        body {
+            font: 20px Montserrat, sans-serif;
+            line-height: 1.8;
+            color: #f5f6f7;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .margin {
+            margin-bottom: 45px;
+        }
+
+        .bg-1 {
+            background-color: #343a40; /* Black */
+            color: #ffffff;
+        }
+
+        .bg-2 {
+            background-color: #474e5d; /* Dark Blue */
+            color: #ffffff;
+        }
+
+        .bg-3 {
+            background-color: #ffffff; /* White */
+            color: #555555;
+        }
+
+        .bg-4 {
+            background-color: #2f2f2f; /* Black Gray */
+            color: #fff;
+        }
+
+        .container-fluid {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .navbar {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+            font-size: 12px;
+            letter-spacing: 5px;
+        }
+
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-danger">
+    <nav class="navbar navbar-expand-md navbar-dark bg-2">
         <a class="navbar-brand mx-3" href="#">Case# 1</a>
         <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="nabarContent">
-            <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
                     <a class="nav-link" href="/exercises/htmlpage.html">Home</a>
-                </li>         
+                </li>
                 <li class="nav=item">
                     <a class="nav-link active" href="/exercises/employees.html">Employees</a>
                 </li>
             </ul>
         </div>
     </nav>
+
     <div class="justify-content-center align-items-center row ml-1" style="background-color:#fff">
         <div class="col-xl-12 text-center py-xl-1">
             <h3><img src="working.gif" width="800" height="400" alt="working animation" /></h3>
         </div>
-            <div class="justify-content-center align-items-center row m-2 ml-3" style="overflow:hidden;overflow-y:scroll;height:70vh;">
-                <div class="list-group col-10" id="employeeList" style="height:45vh;">
-                </div>
-
-
-
-                <!-- employee rows go here-->
+        <div class="justify-content-center align-items-center row m-2 ml-3" style="overflow:hidden;overflow-y:scroll;height:70vh;">
+            <div class="list-group col-10" id="employeeList" style="height:45vh;">
             </div>
+
+
+
+            <!-- employee rows go here-->
+        </div>
     </div>
 
 
