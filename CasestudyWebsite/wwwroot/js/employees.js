@@ -70,8 +70,8 @@
 
     const clearModalFields = () => {
         $("#TextBoxTitle").val("");
-        $("#TextBoxFirstName").val("");
-        $("#TextBoxLastName").val("");
+        $("#TextBoxFirstname").val("");
+        $("#TextBoxLastname").val("");
         $("#TextBoxPhone").val("");
         $("#TextBoxEmail").val("");
         $('#ddlDepartments').val(-1);
