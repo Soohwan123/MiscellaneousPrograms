@@ -9,6 +9,52 @@
 
     // They've git the action button
 
+    $("#actionbutton").prop('disabled', false);
+    $("#actionbutton").prop('disabled', true);
+
+    document.addEventListener("keyup", e => {
+        $("#modalstatus").removeClass(); //remove any existing css on div
+        if ($("#StudentModalForm").valid()) {
+            $("#modalstatus").attr("class", "badge bg-success"); //green
+            $("#modalstatus").text("data entered is valid");
+        }
+        else {
+            $("#modalstatus").attr("class", "badge bg-danger"); //red
+            $("#modalstatus").text("fix errors");
+        }
+    });
+    $("#StudentModalForm").validate({
+        rules: {
+            TextBoxTitle: { maxlength: 4, required: true, validTitle: true },
+            TextBoxFirstname: { maxlength: 25, required: true },
+            TextBoxLastname: { maxlength: 25, required: true },
+            TextBoxEmail: { maxlength: 40, required: true, email: true },
+            TextBoxPhone: { maxlength: 15, required: true },
+        },
+        errorElement: "div",
+        messages: {
+            TextBoxTitle: {
+                required: "required 1-4 chars.", maxlength: "required 1-4 chars.", validTitle: "Mr. Ms. Mrs. or Dr."
+            },
+            TextBoxFirstname: {
+                required: "required 1-25 chars.", maxlength: "required 1-25 chars."
+            },
+            TextBoxLastname: {
+                required: "required 1-25 chars.", maxlength: "required 1-25 chars."
+            },
+            TextBoxPhone: {
+                required: "required 1-15 chars.", maxlength: "required 1-15 chars."
+            },
+            TextBoxEmail: {
+                required: "required 1-40 chars.", maxlength: "required 1-40 chars.", email: "need valid email format"
+            }
+        }
+    });//StudentModalFrom.validate
+
+    $.validator.addMethod("validTitle", (value) => { //custom rule
+        return (value === "Mr." || value === "Ms." || value === "Mrs." || value === "Dr.");
+    }, ""); //.validator.addMethod
+
     const getAll = async (msg) => {
         try {
             $("#employeeList").text("Finding Employee Information...");
@@ -79,6 +125,7 @@
         sessionStorage.removeItem("departmentId");
         sessionStorage.removeItem("timer");
         $("#myModal").modal("toggle");
+        $("#EmployeeModalForm").validate().resetForm();
     };//clearModalFields
 
 
