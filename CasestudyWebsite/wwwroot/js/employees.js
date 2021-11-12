@@ -9,21 +9,44 @@
 
     // They've git the action button
 
-    $("#actionbutton").prop('disabled', false);
-    $("#actionbutton").prop('disabled', true);
+    
+
+
+    const getAll = async (msg) => {
+        try {
+            $("#employeeList").text("Finding Employee Information...");
+            let response = await fetch(`/api/employee`);
+            if (response.ok) {
+                let payload = await response.json(); //this returns a promise, so we await it
+                buildEmployeeList(payload);
+                msg === "" ? // are we appending to an existing message
+                    $("#status").text("Employees Loaded") : $("#status").text(`${msg} - Employees Loaded`)
+            } else if (response.status !== 404) { //probably some other client side error
+                let problemJson = await response.json();
+                errorRtn(problemJson, response.status);
+            } else {  // else 404 not found
+                $("#status").text(error.message);
+            } // else
+        } catch (error) {
+            $("status").text(error.message);
+        }
+    }; //getAll
+
 
     document.addEventListener("keyup", e => {
         $("#modalstatus").removeClass(); //remove any existing css on div
-        if ($("#StudentModalForm").valid()) {
+        if ($("#EmployeeModalForm").valid()) {
             $("#modalstatus").attr("class", "badge bg-success"); //green
             $("#modalstatus").text("data entered is valid");
+            $("#actionbutton").prop('disabled', false);
         }
         else {
             $("#modalstatus").attr("class", "badge bg-danger"); //red
             $("#modalstatus").text("fix errors");
+            $("#actionbutton").prop('disabled', true);
         }
     });
-    $("#StudentModalForm").validate({
+    $("#EmployeeModalForm").validate({
         rules: {
             TextBoxTitle: { maxlength: 4, required: true, validTitle: true },
             TextBoxFirstname: { maxlength: 25, required: true },
@@ -49,31 +72,11 @@
                 required: "required 1-40 chars.", maxlength: "required 1-40 chars.", email: "need valid email format"
             }
         }
-    });//StudentModalFrom.validate
+    });//EmployeeModalForm.validate
 
     $.validator.addMethod("validTitle", (value) => { //custom rule
         return (value === "Mr." || value === "Ms." || value === "Mrs." || value === "Dr.");
     }, ""); //.validator.addMethod
-
-    const getAll = async (msg) => {
-        try {
-            $("#employeeList").text("Finding Employee Information...");
-            let response = await fetch(`/api/employee`);
-            if (response.ok) {
-                let payload = await response.json(); //this returns a promise, so we await it
-                buildEmployeeList(payload);
-                msg === "" ? // are we appending to an existing message
-                    $("#status").text("Employees Loaded") : $("#status").text(`${msg} - Employees Loaded`)
-            } else if (response.status !== 404) { //probably some other client side error
-                let problemJson = await response.json();
-                errorRtn(problemJson, response.status);
-            } else {  // else 404 not found
-                $("#status").text(error.message);
-            } // else
-        } catch (error) {
-            $("status").text(error.message);
-        }
-    }; //getAll
 
     const setupForUpdate = (id, data) => {
         $("#actionbutton").val("update");
@@ -83,6 +86,11 @@
         clearModalFields();
         data.map(employee => {
             if (employee.id === parseInt(id)) {
+
+                let validator = $("#EmployeeModalForm").validate();
+                validator.resetForm();
+
+                $("#modalstatus").attr("class", "");
                 //set value of ddl for departments
                 $('#ddlDepartments').val(employee.departmentID);
 
@@ -94,6 +102,8 @@
                 sessionStorage.setItem("id", employee.id);
                 sessionStorage.setItem("departmentId", employee.departmentID);
                 sessionStorage.setItem("timer", employee.timer);
+                sessionStorage.setItem("picture", employee.picture64);
+                $("#ImageHolder").html(`<img height="120 width="110" src="data:img/png;base64,${employee.picture64}" />`);
                 $("#modalstatus").text("update data");
                 $("#myModal").modal("toggle");
                 $("#myModalLabel").text("Update");
@@ -183,7 +193,9 @@
             emp.id = parseInt(sessionStorage.getItem("id"));
             emp.departmentID = parseInt($("#ddlDepartments").val());
             emp.timer = sessionStorage.getItem("timer");
-            emp.picture64 = null;
+            sessionStorage.getItem("picture")
+                ? emp.picture64 = sessionStorage.getItem("picture")
+                : emp.picture64 = null;
 
             //don't have to do ID, Timer, and department Id because they're already stored in employeeObject from before
             //sent the updated back to the server asynchronously using PUT
@@ -208,15 +220,16 @@
             $("#status").text(error.message);
             console.table(error);
         }
+        $("#myModal").modal("toggle");
     }; // update
 
-
+  
 
 
 
 
     $("#actionbutton").mouseup(async (e) => {
-        $("#actionbutton").val() === "Update" ? update() : add();
+        $("#actionbutton").val() === "update" ? update() : add();
     });
 
     //finds the employee id out of the html element that is clicked
@@ -238,7 +251,7 @@
     }); //EmployeeList Click
 
 
-    const buildEmployeeList = (data) => {
+    const buildEmployeeList = (data, usealldata = true) => {
         $("#employeeList").empty();  //empty the list first
         div = $(`<div class="list-group-item text-white bg-secondary row d-flex" id="status">Employee Info</div>
         <div class= "list-group-item row d-flex text-center" id="heading">
@@ -247,7 +260,7 @@
             <div class="col-4 h4">Last</div>
         </div>`);
         div.appendTo($("#employeeList"));
-        sessionStorage.setItem("allemployees", JSON.stringify(data));
+        usealldata ? sessionStorage.setItem("allemployees", JSON.stringify(data)) : null;
         btn = $(`<button class="list-group-item row d-flex text-center" id="0">...click to add employee</button>`)
         btn.appendTo($("#employeeList"));
         data.map(emp => {
@@ -299,6 +312,28 @@
         );
         $('#ddlDepartments').append(html);
     }
+
+    $("#srch").keyup(() => {
+        let alldata = JSON.parse(sessionStorage.getItem("allemployees"));
+        let filtereddata = alldata.filter((emp) => emp.lastname.match(new RegExp($("#srch").val(), 'i')));
+        buildEmployeeList(filtereddata, false);
+
+    }); //srch keyup
+
+    //do we have a picture?
+    $("input:file").change(() => {
+        const reader = new FileReader();
+        const file = $("#uploader")[0].files[0];
+
+        file ? reader.readAsBinaryString(file) : null;
+
+        reader.onload = (readerEvt) => {
+            //get binary data then convert to encoded string
+            const binaryString = reader.result;
+            const encodedString = btoa(binaryString);
+            sessionStorage.setItem('picture', encodedString);
+        };
+    });
 
     getAll(""); //first grab the data from the server
     loadDepartmentDDL(); //calling departments

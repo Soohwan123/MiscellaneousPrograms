@@ -60,7 +60,7 @@ namespace CaseempdyTests
             EmployeeViewModel model = new EmployeeViewModel();
 
             model.Firstname = "Soohwan";
-            model.Lastname = "Lauersen";
+            model.Lastname = "Kim";
             model.Phoneno = "(555)555-1234";
             model.Title = "Mr.";
             model.DepartmentID = 100;

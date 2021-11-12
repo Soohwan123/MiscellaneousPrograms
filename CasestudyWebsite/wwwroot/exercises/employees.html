@@ -69,7 +69,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/exercises/htmlpage.html">Home</a>
                 </li>
@@ -77,6 +77,9 @@
                     <a class="nav-link active" href="/exercises/employees.html">Employees</a>
                 </li>
             </ul>
+            <form>
+                <input class="form-control" type="search" placeholder="Search" id="srch" aria-label="Search" style="width:10vw;margin-right:5vw;" />
+            </form>
         </div>
     </nav>
 
@@ -94,40 +97,41 @@
         </div>
     </div>
 
-    <form id="EmployeeModalForm" name="StudentModalForm" method="post" action="">
+    <form id="EmployeeModalForm" name="EmployeeModalForm" method="post" action="">
         <div class="modal fade text-black-50" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title" id="myModalLabel">Employee Update</h2>
+                        <h2 class="modal-title" id="myModalLabel">Employee Update with pictures</h2>
                         <button type="button" class="btm-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mx-4 my-4">
                             <div class="card">
                                 <div class="card-header text-center text-black-50">
+                                    <h3><img src="working.gif" width="400" height="170" alt="working animation" /></h3>
                                     Employee Information
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4 text-black-50">Title:</div>
-                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter title" id="TextBoxTitle" class="form-control" /></div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter title" id="TextBoxTitle" name="TextBoxTitle" class="form-control" /></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4 text-black-50">First:</div>
-                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter first name" id="TextBoxFirstname" class="form-control" /></div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter first name" id="TextBoxFirstname" name="TextBoxFirstname" class="form-control" /></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4 text-black-50">Surname:</div>
-                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter last name" id="TextBoxLastname" class="form-control" /></div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter last name" id="TextBoxLastname" name="TextBoxLastname" class="form-control" /></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4 text-black-50">Phone#:</div>
-                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter phone#" id="TextBoxPhone" class="form-control" /></div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter phone#" id="TextBoxPhone" name="TextBoxPhone" class="form-control" /></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4 text-black-50">Email:</div>
-                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter email address" id="TextBoxEmail" class="form-control" /></div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter email address" id="TextBoxEmail" name="TextBoxEmail" class="form-control" /></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4 text-black-50">Department</div>
@@ -136,15 +140,22 @@
                                             <!-- division names go here--->
                                         </div>
                                     </div>
+                                    <div class="row mt-3">
+                                        <div class="col-4">Picture:</div>
+                                        <div class="col-8" id="ImageHolder"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer text-center">
-                            <div id="modalstatus" class="text-center mt-3 mb-2 text-black-50" style="width:100%;"></div>
+        
+                            <input type="file" id="uploader" class="border float-start col-10 col-sm-4" />
+                            <div id="modalstatus" class="text-left mt-3 mb-2" style="width:50%;"></div>
                             <input type="button" class="btn btn-primary" value="update" id="actionbutton" />
 
-                            <input type="button" class="btn btn-secondary text-black-50" value="delete" style="display:none" id="deletebutton" />
+                            <input type="button" class="btn btn-secondary" value="delete" style="display:none" id="deletebutton" />
                             <div id="modalstatus" class="text-left mt-3 mb-2" style="width:50%;"></div>
+
                         </div>
                     </div>
                 </div>

@@ -90,6 +90,20 @@ namespace CasestudyTests
                     Assert.True(false);
             }
         }
+        [Fact]
+        public async Task Employee_LoadPicsTest()
+        {
+            try
+            {
+                DALUtil util = new DALUtil();
+                Assert.True(await util.AddEmployeePicsToDb());
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error - " + ex.Message);
+            }
+        }
     }
 
 }
