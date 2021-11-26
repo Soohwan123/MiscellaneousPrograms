@@ -99,11 +99,12 @@
                 $("#TextBoxLastname").val(employee.lastname);
                 $("#TextBoxPhone").val(employee.phoneno);
                 $("#TextBoxEmail").val(employee.email);
+                $("#ImageHolder").html(`<img height="120 width="110" src="data:img/png;base64,${employee.staffPicture64}" />`);
                 sessionStorage.setItem("id", employee.id);
                 sessionStorage.setItem("departmentId", employee.departmentID);
                 sessionStorage.setItem("timer", employee.timer);
-                sessionStorage.setItem("picture", employee.picture64);
-                $("#ImageHolder").html(`<img height="120 width="110" src="data:img/png;base64,${employee.picture64}" />`);
+                sessionStorage.setItem("picture", employee.staffPicture64);
+               
                 $("#modalstatus").text("update data");
                 $("#myModal").modal("toggle");
                 $("#myModalLabel").text("Update");
@@ -187,15 +188,15 @@
             emp.phoneno = $("#TextBoxPhone").val();
             emp.email = $("#TextBoxEmail").val();
             emp.name = "";
-            emp.picture64 = "";
+            emp.staffPicture64 = "";
 
             //stored earlier, numbers needed for Ids or http 401
             emp.id = parseInt(sessionStorage.getItem("id"));
             emp.departmentID = parseInt($("#ddlDepartments").val());
             emp.timer = sessionStorage.getItem("timer");
             sessionStorage.getItem("picture")
-                ? emp.picture64 = sessionStorage.getItem("picture")
-                : emp.picture64 = null;
+                ? emp.staffPicture64 = sessionStorage.getItem("picture")
+                : emp.staffPicture64 = null;
 
             //don't have to do ID, Timer, and department Id because they're already stored in employeeObject from before
             //sent the updated back to the server asynchronously using PUT
@@ -220,10 +221,22 @@
             $("#status").text(error.message);
             console.table(error);
         }
-        $("#myModal").modal("toggle");
     }; // update
 
-  
+    //do we have a picture?
+    $("input:file").change(() => {
+        const reader = new FileReader();
+        const file = $("#uploader")[0].files[0];
+
+        file ? reader.readAsBinaryString(file) : null;
+
+        reader.onload = (readerEvt) => {
+            //get binary data then convert to encoded string
+            const binaryString = reader.result;
+            const encodedString = btoa(binaryString);
+            sessionStorage.setItem('picture', encodedString);
+        };
+    });
 
 
 
@@ -319,21 +332,6 @@
         buildEmployeeList(filtereddata, false);
 
     }); //srch keyup
-
-    //do we have a picture?
-    $("input:file").change(() => {
-        const reader = new FileReader();
-        const file = $("#uploader")[0].files[0];
-
-        file ? reader.readAsBinaryString(file) : null;
-
-        reader.onload = (readerEvt) => {
-            //get binary data then convert to encoded string
-            const binaryString = reader.result;
-            const encodedString = btoa(binaryString);
-            sessionStorage.setItem('picture', encodedString);
-        };
-    });
 
     getAll(""); //first grab the data from the server
     loadDepartmentDDL(); //calling departments

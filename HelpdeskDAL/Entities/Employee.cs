@@ -7,6 +7,12 @@ namespace HelpdeskDAL
 {
     public partial class Employee : HelpdeskEntity
     {
+        public Employee()
+        {
+            CallEmployees = new HashSet<Call>();
+            CallTeches = new HashSet<Call>();
+        }
+
         public string Title { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -17,5 +23,7 @@ namespace HelpdeskDAL
         public byte[] StaffPicture { get; set; }
 
         public virtual Department Department { get; set; }
+        public virtual ICollection<Call> CallEmployees { get; set; }
+        public virtual ICollection<Call> CallTeches { get; set; }
     }
 }

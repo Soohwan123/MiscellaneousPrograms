@@ -4,10 +4,17 @@ using HelpdeskDAL;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xunit.Abstractions;
+
 namespace CasestudyTests
 {
     public class DAOTests
     {
+        private readonly ITestOutputHelper output;
+        public DAOTests(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
         [Fact]
         public async Task Employee_GetByEmailTest()
         {
@@ -103,6 +110,63 @@ namespace CasestudyTests
             {
                 Debug.WriteLine("Error - " + ex.Message);
             }
+        }
+
+        [Fact]
+        public async Task Call_ComprehensiveTest()
+        {
+            CallDAO cdao = new CallDAO();
+            EmployeeDAO edao = new EmployeeDAO();
+            ProblemDAO pdao = new ProblemDAO();
+
+            Employee Kim = await edao.GetbyEmail("sc@sc.com");
+            Employee burnur = await edao.GetbyEmail("bs@abc.com");
+            Problem badDrive = await pdao.GetByDescription("Hard Drive Failure");
+
+            Call call = new Call
+            {
+                DateOpened = DateTime.Now,
+                DateClosed = null,
+                OpenStatus = true,
+                EmployeeId = Kim.Id,
+                TechId = burnur.Id,
+                ProblemId = badDrive.Id,
+                Notes = "Kim's drive is shot, Burner to fix it"
+            };
+
+            int newCallId = await cdao.Add(call);
+            output.WriteLine("New Call Generated - Id = " + newCallId);
+            call = await cdao.GetById(newCallId);
+            byte[] oldtimer = call.Timer;
+            output.WriteLine("New Call Retrieved");
+            call.Notes += "\n Ordered new drive!";
+
+            if(await cdao .Update(call) == UpdateStatus.Ok)
+            {
+                output.WriteLine("Call was updated " + call.Notes);
+            }
+            else
+            {
+                output.WriteLine("Call was not updated!");
+            }
+
+            call.Timer = oldtimer;
+            call.Notes = "doesn't matter data is stale now";
+            if(await cdao .Update(call) == UpdateStatus.Stale)
+            {
+                output.WriteLine("Call was not updated due to stale data");
+            }
+            cdao = new CallDAO();
+            call = await cdao.GetById(newCallId);
+            if(await cdao .Delete(newCallId) == 1)
+            {
+                output.WriteLine("Call was deleted!");
+            }
+            else
+            {
+                output.WriteLine("Call was not deleted");
+            }
+            Assert.Null(await cdao.GetById(newCallId));
         }
     }
 
