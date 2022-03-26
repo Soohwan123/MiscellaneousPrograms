@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Employees</title>
+    <meta charset="utf-8" />
+    <link href="/lib/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/css/site.css" rel="stylesheet" />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <meta name="viewport" content="width=device=width, initial-scale=1">
+    <style>
+        body {
+            font: 20px Montserrat, sans-serif;
+            line-height: 1.8;
+            color: #f5f6f7;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .margin {
+            margin-bottom: 45px;
+        }
+
+        .bg-1 {
+            background-color: #343a40; /* Black */
+            color: #ffffff;
+        }
+
+        .bg-2 {
+            background-color: #474e5d; /* Dark Blue */
+            color: #ffffff;
+        }
+
+        .bg-3 {
+            background-color: #ffffff; /* White */
+            color: #555555;
+        }
+
+        .bg-4 {
+            background-color: #2f2f2f; /* Black Gray */
+            color: #fff;
+        }
+
+        .container-fluid {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .navbar {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+            font-size: 12px;
+            letter-spacing: 5px;
+        }
+
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-2">
+        <a class="navbar-brand mx-3" href="#">Case# 1</a>
+        <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="nav navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/exercises/htmlpage.html">Home</a>
+                </li>
+                <li class="nav=item">
+                    <a class="nav-link active" href="/exercises/employees.html">Employees</a>
+                </li>
+            </ul>
+            <form>
+                <input class="form-control" type="search" placeholder="Search" id="srch" aria-label="Search" style="width:10vw;margin-right:5vw;" />
+            </form>
+        </div>
+    </nav>
+
+    <div class="justify-content-center align-items-center row ml-1" style="background-color:#fff">
+        <div class="col-xl-12 text-center py-xl-1">
+            <h3><img src="working.gif" width="800" height="400" alt="working animation" /></h3>
+        </div>
+        <div class="justify-content-center align-items-center row m-2 ml-3" style="overflow:hidden;overflow-y:scroll;height:70vh;">
+            <div class="list-group col-10" id="employeeList" style="height:45vh;">
+            </div>
+
+
+
+            <!-- employee rows go here-->
+        </div>
+    </div>
+
+    <form id="EmployeeModalForm" name="EmployeeModalForm" method="post" action="">
+        <div class="modal fade text-black-50" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="myModalLabel">Employee Update with pictures</h2>
+                        <button type="button" class="btm-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mx-4 my-4">
+                            <div class="card">
+                                <div class="card-header text-center text-black-50">
+                                    <h3><img src="working.gif" width="400" height="170" alt="working animation" /></h3>
+                                    Employee Information
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4 text-black-50">Title:</div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter title" id="TextBoxTitle" name="TextBoxTitle" class="form-control" /></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 text-black-50">First:</div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter first name" id="TextBoxFirstname" name="TextBoxFirstname" class="form-control" /></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 text-black-50">Surname:</div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter last name" id="TextBoxLastname" name="TextBoxLastname" class="form-control" /></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 text-black-50">Phone#:</div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter phone#" id="TextBoxPhone" name="TextBoxPhone" class="form-control" /></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4 text-black-50">Email:</div>
+                                        <div class="col-8 text-black-50"><input type="text" placeholder="enter email address" id="TextBoxEmail" name="TextBoxEmail" class="form-control" /></div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-4 text-black-50">Picture:</div>
+                                        <div class="col-8 text-black-50" id="ImageHolder"></div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-4 text-black-50">Department:</div>
+                                        <div class="col-8 text-black-50">
+                                            <select id="ddlDepartments" name="ddlDepartments" class="form-control" />
+                                            <!-- division names go here--->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+        
+                            <input type="file" id="uploader" class="border float-start col-10 col-sm-4" />
+                            <div id="modalstatus" class="text-left mt-3 mb-2" style="width:50%;"></div>
+                            <input type="button" class="btn btn-primary" value="update" id="actionbutton" />
+
+                            <input type="button" class="btn btn-secondary" value="delete" style="display:none" id="deletebutton" />
+                            <div id="modalstatus" class="text-left mt-3 mb-2" style="width:50%;"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script src="/lib/js/jquery.min.js"></script>
+    <script src="/lib/js/jquery.validate.min.js"></script>
+    <script src="/lib/js/bootstrap.min.js"></script>
+    <script src="/js/employees.js"></script>
+</body>
+</html>
